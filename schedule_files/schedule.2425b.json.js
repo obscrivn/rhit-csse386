@@ -1,5 +1,5 @@
 var FORMAT = {
-  meets: "MTWR", /* Valid are UMTWRFS */
+  meets: "MTRF", /* Valid are UMTWRFS */
   showExtra: true,
 };
 

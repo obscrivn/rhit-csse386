@@ -22,91 +22,140 @@
 <h2> Worksheets </h2>
 
 
-<div id="quiz_node"><table class="schedule"><colgroup><col class="firstCol"><col></colgroup><tr><th colspan="1">Worksheet</th><th>Original</th><th>Solution</th></tr><tr><td>q02_datarep</td><td><a href="https://www.rose-hulman.edu/class/csse/csse132/2425b/quizzes/q02_datarep.pdf">Link</a></td><td></td></tr><tr><td>q03_addressingmemory</td><td><a href="https://www.rose-hulman.edu/class/csse/csse132/2425b/quizzes/q03_addressingmemory.pdf">Link</a></td><td></td></tr><tr><td>q04_assembly1</td><td><a href="https://www.rose-hulman.edu/class/csse/csse132/2425b/quizzes/q04_assembly1.pdf">Link</a></td><td></td></tr><tr><td>q05_assembly2</td><td><a href="https://www.rose-hulman.edu/class/csse/csse132/2425b/quizzes/q05_assembly2.pdf">Link</a></td><td></td></tr><tr><td>q06_c_intro</td><td><a href="https://www.rose-hulman.edu/class/csse/csse132/2425b/quizzes/q06_c_intro.pdf">Link</a></td><td></td></tr><tr><td>q07_pointersarrays</td><td><a href="https://www.rose-hulman.edu/class/csse/csse132/2425b/quizzes/q07_pointersarrays.pdf">Link</a></td><td></td></tr><tr><td>q08_string_struct</td><td><a href="https://www.rose-hulman.edu/class/csse/csse132/2425b/quizzes/q08_string_struct.pdf">Link</a></td><td></td></tr><tr><td>q09_memhierarchy</td><td><a href="https://www.rose-hulman.edu/class/csse/csse132/2425b/quizzes/q09_memhierarchy.pdf">Link</a></td><td></td></tr><tr><td>q10_debugging</td><td><a href="https://www.rose-hulman.edu/class/csse/csse132/2425b/quizzes/q10_debugging.pdf">Link</a></td><td></td></tr><tr><td>q12_stack</td><td><a href="https://www.rose-hulman.edu/class/csse/csse132/2425b/quizzes/q12_stack.pdf">Link</a></td><td></td></tr><tr><td>q13_commandline_arguments</td><td><a href="https://www.rose-hulman.edu/class/csse/csse132/2425b/quizzes/q13_commandline_arguments.pdf">Link</a></td><td></td></tr><tr><td>q15_float</td><td><a href="https://www.rose-hulman.edu/class/csse/csse132/2425b/quizzes/q15_float.pdf">Link</a></td><td></td></tr><tr><td>q16_malloc</td><td><a href="https://www.rose-hulman.edu/class/csse/csse132/2425b/quizzes/q16_malloc.pdf">Link</a></td><td></td></tr><tr><td>q17_heap_practice</td><td><a href="https://www.rose-hulman.edu/class/csse/csse132/2425b/quizzes/q17_heap_practice.pdf">Link</a></td><td></td></tr><tr><td>q18_heap_args_practice</td><td><a href="https://www.rose-hulman.edu/class/csse/csse132/2425b/quizzes/q18_heap_args_practice.pdf">Link</a></td><td></td></tr><tr><td>q19_io1</td><td><a href="https://www.rose-hulman.edu/class/csse/csse132/2425b/quizzes/q19_io1.pdf">Link</a></td><td></td></tr><tr><td>q20_io2</td><td><a href="https://www.rose-hulman.edu/class/csse/csse132/2425b/quizzes/q20_io2.pdf">Link</a></td><td></td></tr><tr><td>q21_internet</td><td><a href="https://www.rose-hulman.edu/class/csse/csse132/2425b/quizzes/q21_internet.pdf">Link</a></td><td></td></tr><tr><td>q22_sockets_client</td><td><a href="https://www.rose-hulman.edu/class/csse/csse132/2425b/quizzes/q22_sockets_client.pdf">Link</a></td><td></td></tr><tr><td>q23_exam2_prep_practice</td><td><a href="https://www.rose-hulman.edu/class/csse/csse132/2425b/quizzes/q23_exam2_prep_practice.pdf">Link</a></td><td></td></tr><tr><td>q24_sockets_server</td><td><a href="https://www.rose-hulman.edu/class/csse/csse132/2425b/quizzes/q24_sockets_server.pdf">Link</a></td><td></td></tr><tr><td>q25_pointerForOutput</td><td><a href="https://www.rose-hulman.edu/class/csse/csse132/2425b/quizzes/q25_pointerForOutput.pdf">Link</a></td><td></td></tr><tr><td>q27_practice</td><td><a href="https://www.rose-hulman.edu/class/csse/csse132/2425b/quizzes/q27_practice.pdf">Link</a></td><td></td></tr><tr><td>q28_pthreads</td><td><a href="https://www.rose-hulman.edu/class/csse/csse132/2425b/quizzes/q28_pthreads.pdf">Link</a></td><td></td></tr><tr><td>q29_mutual_exclusion</td><td><a href="https://www.rose-hulman.edu/class/csse/csse132/2425b/quizzes/q29_mutual_exclusion.pdf">Link</a></td><td></td></tr></table></div>
-
-<!-- <script language="javascript">
-// Set the path to the directory you want to list the PDF files of
-const directoryPath = './quizzes/';
-
-// Use the fetch API to retrieve the list of files in the directory
-fetch(directoryPath)
-  .then(response => response.text())
-  .then(data => {
-    // Parse the HTML response into a document object
-    const parser = new DOMParser();
-    const htmlDoc = parser.parseFromString(data, 'text/html');
-
-    // Find all the <a> elements in the directory listing that link to PDF files
-    const solnLinks = Array.from(htmlDoc.querySelectorAll('a'))
-      .filter(link => link.href.endsWith('_solutions.pdf'));
-
-    const fileLinks = Array.from(htmlDoc.querySelectorAll('a'))
-      .filter(link => link.href.endsWith('.pdf') && !link.href.includes('solutions'));
-
-    // // Create a table to display the list of PDF files
-    // const table = document.createElement('table');
-
-    // Add a header row to the table
-    // const headerRow = table.insertRow();
-    // const filenameHeader = headerRow.insertCell();
-    // const quizHeader = headerRow.insertCell();
-    // const solnHeader = headerRow.insertCell();
-    // first, build header
-    const DCE = function(foo) { return document.createElement(foo); }
-    var tableNode = DCE("table");
-    tableNode.setAttribute("class", "schedule");
-    var cg = DCE("colgroup");
-    var c = DCE("col");
-    c.setAttribute('class', "firstCol");
-    cg.appendChild(c);
-    c = DCE("col");
-    cg.appendChild(c);
-    tableNode.appendChild(cg);
-
-    var tr = DCE("tr");
-    var th = DCE("th");
-    th.setAttribute('colspan', '1');
-    th.textContent = "Quiz Name";
-    tr.appendChild(th);
-    th = DCE("th"); th.textContent = "Original"; tr.appendChild(th);
-    th = DCE("th"); th.textContent = "Solution"; tr.appendChild(th);
-    tableNode.appendChild(tr);
-
-    // Loop through the <a> elements that link to PDF files and add a row to the table for each file
-    fileLinks.forEach(link => {
-      // Create a row for the PDF file
-      var r = document.createElement("tr");
-      var d_1 = document.createElement("td");
-      d_1.textContent = `${link.textContent.replace('.pdf', '')}`;
-      r.appendChild(d_1);
-      var d = document.createElement("td");
-      d.innerHTML = `<a href="./quizzes/${link.textContent}">Link</a>`;
-      r.appendChild(d);
-      d = document.createElement("td");
-      d.innerHTML = solnLinks.some(slink => slink.href.includes(d_1.textContent)) ? `<a href="./quizzes/${d_1.textContent}_solutions.pdf">Link</a>` : '';
-      r.appendChild(d);
-      tableNode.appendChild(r);
-
-      // Set the filename and link to the PDF file
-      // filenameCell.innerHTML = `<a href="${link.href}">${link.textContent}</a>`;
-
-      // Use the fetch API to retrieve the file size and date modified
-      // fetch(link.href)
-      //   .then(response => response.blob())
-      //   .then(blob => {
-      //     // Set the file size in the table
-      //     sizeCell.textContent = `${(blob.size / 1024).toFixed(2)} KB`;
-
-      //     // Set the file date modified in the table
-      //     const lastModified = new Date(blob.lastModified);
-      //     dateCell.textContent = `${lastModified.toLocaleDateString()} ${lastModified.toLocaleTimeString()}`;
-      //   });
-    });
-
-    // Add the table to the page
-    document.getElementById('quiz_node').appendChild(tableNode);
-  });
-
- </script> -->
+<div id="quiz_node">
+    <table class="schedule">
+        <colgroup>
+            <col class="firstCol">
+            <col>
+        </colgroup>
+        <tr>
+            <th colspan="1">Worksheet</th>
+            <th>Original</th>
+            <th>Solution</th>
+        </tr>
+        <!-- Week 1 -->
+        <tr>
+            <td>Worksheet01</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Worksheet02</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Quiz01</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr style="border-top: thick solid black;">
+            <td>Worksheet03</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Worksheet04</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Quiz02</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr style="border-top: thick solid black;">
+            <td>Worksheet05</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Worksheet06</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Quiz03</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr style="border-top: thick solid black;">
+            <td>Worksheet07</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Worksheet08</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Quiz04</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr style="border-top: thick solid black;">
+            <td>Worksheet09</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Worksheet10</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Quiz05</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr style="border-top: thick solid black;">
+            <td>Worksheet11</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Worksheet12</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Quiz06</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr style="border-top: thick solid black;">
+            <td>Worksheet13</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Worksheet14</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Quiz07</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr style="border-top: thick solid black;">
+            <td>Worksheet15</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Worksheet16</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Quiz08</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+</div>
 
 </html>
