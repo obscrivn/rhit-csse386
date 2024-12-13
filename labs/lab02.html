@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CSSE 386</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" type="text/css" href="../syllabus_files/schedule.css">
+<link rel="stylesheet" type="text/css" href="../syllabus_files/screen.css">
+</head>
+<body>
+<div id="header">
+        <a id="index_link" href="../index.html">CSSE 386</a>
+        <a id="syllabus_link" href="../syllabus.html">Syllabus</a>
+        <a id="schedule_link" href="../schedule.html">Schedule</a>
+        <a id="quiz_link" href="../worksheets.html">Worksheets/Quizzes</a>
+        <a id="quiz_link" href="../labs.html">Labs</a>
+        <a id="resources_link" href="../resources.html">Resources</a>
+        <div style="clear:both;"></div>
+    </div>
+
+<div id="content">
+
+    <h1>Lab Assignment 02: Exploring Palmer Penguins Dataset</h1>
+    <p><strong>Objective:</strong> In this lab, you will explore the Palmer Penguins dataset to:</p>
+    <ul>
+        <li>identify missing data</li>
+        <li>visualize data</li>
+        <li>impute values</li>
+        <li>uncover interesting insights</li>
+    </ul>
+
+    <h2>Instructions</h2>
+    <div>Provide citation for any portion that of the code that you consulted external sources. Note you cannot use genAI to generate solutions. You are ONLY allowed to debug your code with AI assistance and you must indicate clear where (which part of the code) you used the AI assitance to debug</div>
+    <p>Make sure to answer any questions marked as QUESTION (in bold)</p>
+    <p>Submission: code cells should be executed and show the output and graphs. If you have collaborated with another student, state their name, but the submission and the notebook must be individual (no shared URL allowed). Set the Shared URL Link to Viewable publicly and paste the link to Gradescope assignment Lab02</p>
+    <section>
+        <h3>Step 1. Understanding Penguin dataset (15pts) </h3>
+        <p>The first step of exploratory data analysis is to explore the number of instances, 
+            number of features, and type of each feature</p>
+            <p>Download palmer_penguin.csv data from the course schedule</p> 
+            <p>Create a new colab notebook. Make sure you add your name</p> 
+        <ol>
+       <li> <p>Import pandas and matplotlib libraries </p></li>
+       <li> <p>Import data and name it <strong>dataset</strong></p></li>
+    <li><p> Display the first 5 columns</p></li>
+    <li><p> Identify the shape of the dataset</p></li>
+    <li><p> Identify the information about features types</p></li>
+    
+    </ol>
+<div><strong>Questions</strong>
+<ul>
+<li>How many instances are in the penguins dataset?</li>
+<li>How many features are in the penguins dataset?</li>
+<li>Which columns contain the categorical features in the dataset?</li>
+</ul>
+</div>
+        </section>
+<section>
+    <h3>Step 2 Exploring Relationships (20 Points)</h3>
+    <p>Once the dataset's size and features are understood, we can explore the relationships between features.
+Data visualizations like scatter plots give a visual representation of how pairs of features change together.
+Instead of creating individual scatteplots, you will learn how to use pair plot with seaborn library.</p>
+<ol>
+    <li><p>Import seaborn library</p></li>
+<pre><code>import seaborn as sns</code></pre>
+
+    <li>Seaborn's pairplot() creates a grid of pairwise scatterplots for numerical features in the penguins dataset:</li>
+<pre><code>p = sns.pairplot(dataset)
+plt.show()
+</code></pre>
+<li>Increase the font for all future plots, using update(). Then rerun your pairplot:</li>
+<pre><code>plt.rcParams.update({'font.size': 14})</code></pre>
+<li>Add categorical values to the plot.  
+    The hue parameter adds color based on the values of the <strong>island</strong> column:</li>
+<pre><code>p = sns.pairplot(dataset, hue='island')
+plt.show()
+</code></pre>
+<li>Replace species by sex category</li>
+<li>Create a contingency table (=crosstable) for species and sex</li>
+<pre><code>pd.crosstab(index=dataset['species'], columns=dataset['island'])</code></pre>
+<li>Create a barplot with species but instead of using barplot we will use a simplified version with seaborn
+<ul>
+    <li>Take a look at <a href="https://seaborn.pydata.org/generated/seaborn.countplot.html" target="_blank">https://seaborn.pydata.org/generated/seaborn.countplot.html</a></li>
+        <li>Create a countplot for species</li>
+        <li>Create a countplot for species but color-coded with island</li>
+    </li>
+    </ul>
+</ol>
+<div><strong>Questions</strong>
+    <ul>
+<li>Which island has only Adelie penguins?</li>
+<li>What is the relationship between bill length and body mass?</li>
+<li>Look at the pairplot histogram of bill lengths (top left), and then examine the same plot with hues for species and island. Describe any interesting observation(s)</li>
+
+</ul>  
+</div>
+</section>
+
+<section>
+    <h3>Step 3 Describe the shape of data (15 Points)</h3>
+    <p>The shape of a feature's distribution is important way to examine if data is normally distributed, or skewed</p>
+<ol>
+<li>Calculate descriptive statistics using describe()</li>
+<li>Take a look at the documentation <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.describe.html" target="_blank">https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.describe.html</a> and include all data. The default is only for numerical</li>
+<li>Create histograms for numeric data (should be 4). See how to drop the last column year:</li>
+    To drop year column dataset.drop(columns=["year"]).hist()
+<li>Adjust the figure size to fit 4 histograms better. Then rerun your plot</li>  
+<pre><code>plt.rcParams["figure.figsize"] = (12, 10)</code></pre>  
+<li>Change the size of the bins, try different numbers. Check out how to change bins: <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.hist.html" target="_blank">https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.hist.html</a>  </li>
+<li>Add title (Come up with a good title)</li>
+</ol>
+</section>
+<section>
+    <h3>Step 4 Detect missing data (20pts)</h3>
+    <p>If only a few instances have missing data, those instances may be set aside without having a negative impact on a model. 
+        if many instances have missing data, techniques like imputation may be needed</p>
+<ol>
+    <li>Use pd.isna() to identify missing values for bill length</li>
+<pre><code>dataset[pd.isna(dataset['bill_length_mm'])]</code></pre>
+<li>Display missing data counts for all columns (see In-Class Labs)</li>
+<li>Import missingno library - see In-Class Practice</li>
+<li>Use bar() amd matrix() to visualize data</li>
+</ol>
+<div><strong>Questions</strong>
+<ul>
+    <li>Which columns have missing values?</li>
+    <li>How many penguins are missing information about bill length?</li>
+<li>What type of missing data are the numerical measurements for these two penguins? HINT: are there any observable patterns for these penguins (HINT:if yes -> MAR; if no -> MCAR)</li>
+</ul>
+</div>
+    </section>
+    <section>
+        <h3>Step 5 Impute missing data (20 Points)</h3>
+
+    <ol>
+        <li>Impute bill_length_mm column with mean()</li>
+    <pre><code>#Follow this format:
+dataset['column'] = dataset['column'].fillna(dataset['column'].name()) 
+# where name is the imputation method
+    </code></pre>
+        <li>Impute bill_depth_mm column with median()</li>
+    <li>Impute flipper_length_mm column with your own choice of method</li>
+    <li>Impute categorical missing data with the word "Unknown". HINT: it will be just the string value</li>
+    <li>Make sure all missing data is imputed. Run info()</li>
+    <li>Finally, display info() with dropped na dataset</li>
+    </ol>
+    <div><strong>Questions</strong>
+    <ul>
+        <li>Currently, you used a placeholder "Unknown" for categorical data. How this method can be useful? What other methods could you apply to categorical data?</li>
+    <li>What did you learn in this lab? Do you feel prepared now to explore your own data for homework next week?</li>
+    </ul>
+    </div>
+        </section>
+<h3>Grading Rubrics</h3>
+<ol>
+<li>Step 1 Understanding data 15pts (all questions are answered)</li> 
+<li>Step 2 Exploring Relations 20pts (all questions are answered</li>
+<li>Step 3 Shape of Data 15pts </li>
+<li>Step 4 Missing data 20pts (all questions are answered) </li>
+<li>Step 5 Imputation 20pts (all questions are answered)</li>
+<li>Submission, Code, Format, Help citation (10 Points)</li>
+</ol>
+        </body>
+        </html>
