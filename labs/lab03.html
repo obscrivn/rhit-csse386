@@ -104,15 +104,13 @@ upper_bound = Q3 + 1.5*IQR
 <pre>
 <code>df = df[(df["MyColumn"] >= lower_bound) & (df["MyColumn"] <= upper_bound)]</code></pre>
 </li>
-<li>df is going to be your dataset for the next steps</li>
+<li></p>df is going to be your dataset for the next steps</p></li>
     </ul>
-<li>Repeat the boxplot figure using df now: sns.boxplot(data = df)</li>
-</ul>
+<li></p>Repeat the boxplot figure using df now: sns.boxplot(data = df)</p></li>
 
-
-<li>Rescale data. Hierarchical clustering uses distance metrics (e.g., Euclidean or Manhattan distance) to build a dendrogram.
+<li><p>Rescale data. Hierarchical clustering uses distance metrics (e.g., Euclidean or Manhattan distance) to build a dendrogram.
     Z-score standardization (StandardScaler) ensures all features contribute equally to the distance calculations by centering them around 0. 
-    The rescaled dataset will be called <strong>scaled_data</strong>. Use StandardScaler from sklearn <a href="https://scikit-learn.org/1.5/modules/generated/sklearn.preprocessing.StandardScaler.html" target="_blank">(see documentation)</a></li>
+    The rescaled dataset will be called <strong>scaled_data</strong>. Use StandardScaler from sklearn <a href="https://scikit-learn.org/1.5/modules/generated/sklearn.preprocessing.StandardScaler.html" target="_blank">(see documentation)</a></p></li>
 </ol>
 
 </section>
@@ -134,10 +132,10 @@ upper_bound = Q3 + 1.5*IQR
 <code>dendrogram(complete_clustering)
 plt.show()</code></pre>
 </li>
-<li>Use linkage method="average" and visualize it</li>
-<li>Use linkage method="single" and visualize it</li>
-<li>The optimal number of clusters can be obtained by identifying the highest vertical line that 
-    does not intersect with any other clusters (horizontal line)</li>
+<li><p>Use linkage method="average" and visualize it</p></li>
+<li><p>Use linkage method="single" and visualize it</p></li>
+<li><p></p>The optimal number of clusters can be obtained by identifying the highest vertical line that 
+    does not intersect with any other clusters (horizontal line)</p></li>
 </ol>
 <div><strong>Questions</strong>
     <ul>
@@ -186,7 +184,7 @@ plt.show()</code></pre>
     <li>Name one interesting thing that you learned from the Lab?</li>
 </ul>
     </div>
-    <p>Note: The results of the clustering can be further used as labels for ML modeling </p>
+    <p>Note: Now we can use the results of this clustering as new labels for ML modeling. </p>
         </section>
 <h3>Grading Rubrics</h3>
 <ol>
