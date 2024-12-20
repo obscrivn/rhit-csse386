@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CSSE 386</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" type="text/css" href="../syllabus_files/schedule.css">
+<link rel="stylesheet" type="text/css" href="../syllabus_files/screen.css">
+</head>
+<body>
+<div id="header">
+        <a id="index_link" href="../index.html">CSSE 386</a>
+        <a id="syllabus_link" href="../syllabus.html">Syllabus</a>
+        <a id="schedule_link" href="../schedule.html">Schedule</a>
+        <a id="quiz_link" href="../worksheets.html">Worksheets/Quizzes</a>
+        <a id="quiz_link" href="../labs.html">Labs</a>
+        <a id="resources_link" href="../resources.html">Resources</a>
+        <div style="clear:both;"></div>
+    </div>
+
+<div id="content">
+
+    <h1>Lab Assignment 03: Hierarchical Clustering Analysis</h1>
+    <p><strong>Objective:</strong> In this lab, you will explore the Loan dataset to:</p>
+    <ul>
+        <li>Split into testing/Training subsets</li>
+        <li>Perform data normalization</li>
+        <li>Use seaborn to visualize clusters</li>
+        <li>Apply scipy for hierarchical clustering</li>
+    </ul>
+
+    <h2>Instructions</h2>
+    <div>Provide citation for any portion that of the code that you consulted external sources. Note you cannot use genAI to generate solutions. You are ONLY allowed to debug your code with AI assistance and you must indicate clear where (which part of the code) you used the AI assitance to debug</div>
+    <p>Make sure to answer any questions marked as QUESTION (in bold)</p>
+    <p>Submission: code cells should be executed and show the output and graphs. If you have collaborated with another student, state their name, but the submission and the notebook must be individual (no shared URL allowed). Set the Shared URL Link to Viewable publicly and paste the link to Gradescope assignment Lab02</p>
+    <section>
+        <h3>Step 0. Understanding Hierarchical Clustering </h3>
+        <p>The hierarchical clustering approach is one of the techniques used in unsupervised machine learning</p>
+        <p>In the figure below, at first 4 and 6 are combined into one cluster, say cluster 1, since they were the closest in distance followed by points 1 and 2, say cluster 2. After that 5 was merged in the same cluster 1 followed by 3 resulting in two clusters. At last the two clusters are merged into a single 
+            cluster and this is where the clustering process stops.</p>
+            <img src="hclust_dend_cut.jpeg" height="200px">
+            <p>To approximate the number of clusters, you can leverage the results from the dendrogram 
+                by cutting the dendrogram tree with a horizontal line at a height where the line can traverse 
+                the maximum distance up and down without intersecting the merging point. In 
+                the above case it would be between heights 1.5 and 2.5 as shown. If you make the cut as shown 
+                you will end up with only two clusters (but this is not a hard rule).</p>
+        <h3>Step 1. Loan dataset (15pts) </h3>
+        <p>Import pandas, seaborn, matplotlib, scipy</p>
+            <p>Download loan data from kaggle <a href="https://www.kaggle.com/datasets/itssuru/loan-data" target="_blank">Link</a></p> 
+            <p></p> 
+        <ol>
+       <li> <p>Import pandas, seaborn, matplotlib, scipy </p></li>
+       <li> <p>Import data and name it <strong>loan_data</strong></p></li>
+    <li><p> Display the first 5 columns</p></li>
+    <li><p> Check for null values</p></li>
+    
+    </ol>
+</section>
+<div><strong>Questions</strong>
+<ul>
+<li>Are there any null values in this dataset?</li>
+</ul>
+</div>
+
+<section>
+    <h3>Step 2 Preprocessing (20 Points)</h3>
+    
+<ol>
+    <li><p>We are going to analyze the loan data using all the columns except the following: <strong>Purpose</strong>
+        and <strong>Not.fully.paid</strong>. Recall that axis=1 refers to a column dimension.</p>
+<pre>
+<code>cleaned_data = loan_data.drop(['purpose', 'not.fully.paid'], axis=1)</code></pre>
+</li>
+    <li>We want to check for outliers. Create a box plot to visualize outliers:
+<pre>
+<code>plt.rcParams['figure.figsize'] = [14,6]
+sns.boxplot(data = cleaned_data)
+# add title "Outlier Distribution"
+# Add y-axis label "Range"
+# Add x-axis label "Attributes"
+plt.show()
+</code></pre>
+<p>If you want to adjust font, you can add fontsize = 16 or add fontweight = 'bold'</p>
+<pre>
+<code>plt.title("MyTitle", fontsize=16)</code></pre>
+</li>
+<li>To remove outliers, we are going to use IQR (interquartile range = remember the box in boxplot from Q1 to Q3).</li>
+<ul>
+    <li>IQR is the difference between Q1 and Q3</li>
+    <li> To get Q1 and Q3 (replace MyColumn with the name of the column with outliers</li>
+    <pre>
+<code>Q1 = cleaned_data["MyColumn"].quantile(0.05)
+Q3 = cleaned_data["MyColumn"].quantile(0.95)</code></pre>
+<li> Outlier is a point that lies outside of the range:
+    <pre>
+<code>lower_bound = Q1 - 1.5*IQR
+upper_bound = Q3 + 1.5*IQR
+    </code></pre></li>
+    <li>Create a copy of dataframe (we do not want to modify the actual data)
+    <pre><code>df = cleaned_data.copy()</code></pre>
+    </li>
+<li> Use the calculated lower_bound and upper_bound to filter the rows in df:
+<pre>
+<code>df = df[(df["MyColumn"] >= lower_bound) & (df["MyColumn"] <= upper_bound)]</code></pre>
+</li>
+<li>df is going to be your dataset for the next steps</li>
+    </ul>
+<li>Repeat the boxplot figure using df now: sns.boxplot(data = df)</li>
+</ul>
+
+
+<li>Rescale data. Hierarchical clustering uses distance metrics (e.g., Euclidean or Manhattan distance) to build a dendrogram.
+    Z-score standardization (StandardScaler) ensures all features contribute equally to the distance calculations by centering them around 0. 
+    The rescaled dataset will be called <strong>scaled_data</strong>. Use StandardScaler from sklearn <a href="https://scikit-learn.org/1.5/modules/generated/sklearn.preprocessing.StandardScaler.html" target="_blank">(see documentation)</a></li>
+</ol>
+
+</section>
+
+<section>
+    <h3>Step 3 Clustering (15 Points)</h3>
+    <p>There are three standard ways to measure the nearest pair of clusters before merging them: (1) Single linkage, (2) Complete linkage, and (3) Average linkage. For more information see <a href="https://www.geeksforgeeks.org/scipy-cluster-hierarchy-dendrogram/" target="_blank">link</a></p>
+    
+<ol>
+<li>Import scipy
+<pre><code>from scipy.cluster.hierarchy import linkage, dendrogram</code></pre>
+</li>
+<li>Apply complete linkage method
+ <pre><code>complete_clustering = linkage(scaled_data, method="complete", metric="euclidean")</code></pre>   
+</li>
+<li>Visualize the dendrogram. The x-axis of the dendrogram represents the samples in the data.
+    The y-axis represents the distance between those samples. The higher the line, the more dissimilar are those samples/clusters.
+    <pre>
+<code>dendrogram(complete_clustering)
+plt.show()</code></pre>
+</li>
+<li>Use linkage method="average" and visualize it</li>
+<li>Use linkage method="single" and visualize it</li>
+<li>The optimal number of clusters can be obtained by identifying the highest vertical line that 
+    does not intersect with any other clusters (horizontal line)</li>
+</ol>
+<div><strong>Questions</strong>
+    <ul>
+        <li>How many clusters do you identify using complete linkage?</li>
+        <li>How many clusters do you identify using average linkage?</li>
+    <li>How many clusters do you identify using single linkage?</li>
+    <li>What number of clusters makes more sense to you? Explain.</li>
+    </ul>
+    </div>
+</section>
+
+    <section>
+        <h3>Step 4 Interpretation (20 Points)</h3>
+        <p>Let's assume that you found 2 clusters as the optimal number!</p>
+        <div><strong>Questions</strong>
+            <ul>
+                <li>Revisit Kaggle dataset website and read what was the main purpose of the loan data (what it was supposed to predict or classify?). Write down the purpose. This is what is called your prior knowledge about dataset</li>
+            </ul>
+            </div>
+    <ol>
+<li>let's look at the clusters mean based on the borrower’s credit score. We are going to cut clusters into 2. cut_tree from scipy will return array:  
+    <pre>
+<code>from scipy.cluster.hierarchy import cut_tree
+cluster_labels = cut_tree(average_clustering, n_clusters=2)
+cluster_labels[:10]
+    </code></pre></li> 
+<li>Modify the code by reshaping the array output
+<pre>
+<code>cluster_labels = cut_tree(average_clustering, n_clusters=2).reshape(-1, )
+cluster_labels[:10]</code></pre>
+</li>
+    <li>We are going to add a new column to the dataset to store cluster groups
+        <pre><code>df["Cluster"] = cluster_labels</code></pre>
+    </li>
+    <li>Display the borrower's credit score mean based on the cluster data
+<pre>
+<code>sns.boxplot(x="Cluster", y="fico", data=df)
+plt.show()</code></pre>
+    </li>
+    </ol>
+    <div><strong>Questions</strong>
+    <ul>
+        <li>What difference did you notice when you applied reshape? What was its purpose?</li>
+    <li>Explain the results of the boxplot</li>
+    <li>Why do you think we did not plot the scaled_data but plot the actual data (df) in the last plot?</li>
+    <li>Name one interesting thing that you learned from the Lab?</li>
+</ul>
+    </div>
+    <p>Note: The results of the clustering can be further used as labels for ML modeling </p>
+        </section>
+<h3>Grading Rubrics</h3>
+<ol>
+<li>Step 1 Loan Dataset 15pts (all questions are answered)</li> 
+<li>Step 2 Preprocessing 20pts</li>
+<li>Step 3 Clustering 30pts </li>
+<li>Step 4 Interpretation 20pts (all questions are answered) </li>
+<li>Submission, Code, Format, Help citation (15 Points)</li>
+</ol>
+        </body>
+        </html>

@@ -17,9 +17,21 @@ margin: 0px;
 padding-bottom: 20px;
 }
 
+
+
+@media (max-width: 600px) {
+  #content {
+    max-width: 90%; /* Adjust max-width for smaller screens */
+  }
+}
+
 #content {
 margin: 1em;
 width: 55em;
+width: 100%;
+max-width: 800px; 
+margin: 0 auto;
+padding: 20px;
 }
 
 table {
