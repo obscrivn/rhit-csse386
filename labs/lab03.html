@@ -85,13 +85,13 @@ plt.show()
 <pre>
 <code>plt.title("MyTitle", fontsize=16)</code></pre>
 </li>
-<li>To remove outliers, we are going to use IQR (interquartile range = remember the box in boxplot from Q1 to Q3).</li>
+<li>To remove outliers, we are going to use IQR (interquartile range = remember the box in boxplot from Q1 to Q3). Note, Traditionally Q1 and Q3 are .25 and 0.75. Sometimes with outliers we use 0.5 and 0.95 to trim down the amount of data in outliers</li>
 <ul>
     <li>IQR is the difference between Q1 and Q3</li>
     <li> To get Q1 and Q3 (replace MyColumn with the name of the column with outliers</li>
     <pre>
-<code>Q1 = cleaned_data["MyColumn"].quantile(0.05)
-Q3 = cleaned_data["MyColumn"].quantile(0.95)</code></pre>
+<code>Q1 = cleaned_data["MyColumn"].quantile(0.05) #note usually it is 0.25
+Q3 = cleaned_data["MyColumn"].quantile(0.95) #note usually it is 0.75</code></pre>
 <li> Outlier is a point that lies outside of the range:
     <pre>
 <code>lower_bound = Q1 - 1.5*IQR
