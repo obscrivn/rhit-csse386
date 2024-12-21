@@ -85,7 +85,22 @@ plt.show()
 <pre>
 <code>plt.title("MyTitle", fontsize=16)</code></pre>
 </li>
-<li>To remove outliers, we are going to use IQR (interquartile range = remember the box in boxplot from Q1 to Q3). Note, Traditionally Q1 and Q3 are .25 and 0.75. Sometimes with outliers we use 0.5 and 0.95 to trim down the amount of data in outliers</li>
+<li><p>To remove outliers, we are going to use IQR (interquartile range = remember the box in boxplot from Q1 to Q3). Note, Traditionally Q1 and Q3 are .25 and 0.75. Sometimes with outliers we use 0.5 and 0.95 to trim down the amount of data in outliers</p>
+<pre><code>
+# applying function to all columns
+def remove_outliers(data):  
+    df = data.copy()  
+    for col in list(df.columns):
+        Q1 = df[str(col)].quantile(0.05)
+        Q3 = df[str(col)].quantile(0.95)
+        IQR = Q3 - Q1
+        lower_bound = Q1 - 1.5*IQR
+        upper_bound = Q3 + 1.5*IQR
+        df = df[(df[str(col)] >= lower_bound) & (df[str(col)] <= upper_bound)]  
+    return df
+</code></pre>
+
+<p>Here are some explanation of what the function does:</p></li>
 <ul>
     <li>IQR is the difference between Q1 and Q3</li>
     <li> To get Q1 and Q3 (replace MyColumn with the name of the column with outliers</li>
@@ -104,13 +119,17 @@ upper_bound = Q3 + 1.5*IQR
 <pre>
 <code>df = df[(df["MyColumn"] >= lower_bound) & (df["MyColumn"] <= upper_bound)]</code></pre>
 </li>
-<li></p>df is going to be your dataset for the next steps</p></li>
-    </ul>
-<li></p>Repeat the boxplot figure using df now: sns.boxplot(data = df)</p></li>
-
-<li><p>Rescale data. Hierarchical clustering uses distance metrics (e.g., Euclidean or Manhattan distance) to build a dendrogram.
-    Z-score standardization (StandardScaler) ensures all features contribute equally to the distance calculations by centering them around 0. 
-    The rescaled dataset will be called <strong>scaled_data</strong>. Use StandardScaler from sklearn <a href="https://scikit-learn.org/1.5/modules/generated/sklearn.preprocessing.StandardScaler.html" target="_blank">(see documentation)</a></p></li>
+</ul>
+<li><p>Apply this function to <strong>cleaned_data</strong>. You can call a new subset <strong>df</strong>.</p>
+<pre><code>df = remove_outliers(cleaned_data)</code></pre></li>
+<li><p>Repeat the boxplot figure for new subset:</p>
+    <pre><code>sns.boxplot(data = df)</code></pre></li>
+<li><p>Rescale data: Hierarchical clustering uses distance metrics (e.g., Euclidean or Manhattan distance) to build a dendrogram.
+    Z-score standardization (StandardScaler) ensures all features contribute equally to the distance calculations by centering them around 0. </p>
+    <ul>
+    <li><p>The rescaled dataset will be called <strong>scaled_data</strong></p></li>
+        <li><p>Use StandardScaler from sklearn <a href="https://scikit-learn.org/1.5/modules/generated/sklearn.preprocessing.StandardScaler.html" target="_blank">(see documentation)</a></p></li>
+</ul>
 </ol>
 
 </section>
@@ -133,7 +152,12 @@ upper_bound = Q3 + 1.5*IQR
 plt.show()</code></pre>
 </li>
 <li><p>Use linkage method="average" and visualize it</p></li>
-<li><p>Use linkage method="single" and visualize it</p></li>
+<li><p>Use linkage method="single" and visualize it</p>
+<p>If you get error on "recursion limit" - it means the single algorithm is building too many clusters and ran out of the max number of default recursions. Add the following before running dendrogram: 
+    <pre>
+<code>import sys
+sys.setrecursionlimit(10000)</code></pre>
+</p></li>
 <li><p></p>The optimal number of clusters can be obtained by identifying the highest vertical line that 
     does not intersect with any other clusters (horizontal line)</p></li>
 </ol>
