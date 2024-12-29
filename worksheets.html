@@ -4,20 +4,25 @@
 <title>CSSE 386</title>
 
 
-<link rel="stylesheet" type="text/css" href="./worksheets_files/screen.css">
-<link rel="stylesheet" type="text/css" href="./worksheets_files/schedule.css">
+<link rel="stylesheet" type="text/css" href="./syllabus_files/screen.css">
+<link rel="stylesheet" type="text/css" href="./syllabus_files/schedule.css">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <style>
     body {
-        font-family: Arial, sans-serif;
-        /* display: flex; */
-        margin: 20px;
+        font-family: Helvetica, Arial, sans-serif;
+margin: 0px;
+padding-bottom: 20px;
     }
     .schedule-container {
             width: auto; /* Adjust the container width based on the content */
             max-width: 80%; /* Ensure it doesn't get too wide */
             /* margin: 0 auto; Center the container */
         }
+        .schedule td {
+  padding: 5px;
+  background: inherit;
+  border: 1px solid #aaa;
+}
     .schedule {
         width: 80%;
         border-collapse: collapse;
@@ -27,19 +32,35 @@
         border: 1px solid #ddd;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
-
+    table.schedule  {
+  border:2px solid black;
+  border-collapse: collapse;
+}
     .schedule thead {
         background-color: #f4f4f4;
     }
+    table {
+border: 1px solid #000;
+border-collapse: collapse;
+}
 
+tr {
+vertical-align: top;
+}
+
+td {
+padding: 0.15em;
+padding-bottom: 0.5em;
+border: 1px solid #aaa;
+}
     .schedule th, .schedule td {
         padding: 12px;
         border: 1px solid #ddd;
     }
 
     .schedule th {
-        background-color: #4a5765;
-        color: white;
+        background-color: #aaa;
+        color: black;
         font-weight: bold;
     }
 
@@ -67,21 +88,11 @@
         color: #FF9900;
         font-style: italic;
     }
-
     .schedule .solution-tbp a {
     color: #FF9900;
     font-style: italic;
     text-decoration: none; /* Optional: Remove underline */
 }
-
-    /* @media (max-width: 768px) {
-        .schedule {
-            font-size: 0.9em;
-        }
-        .schedule th, .schedule td {
-            padding: 8px;
-        }
-    } */
     @media (max-width: 480px) {
             .schedule, .schedule thead, .schedule tbody, .schedule th, .schedule td, .schedule tr {
                 display: block;
@@ -114,7 +125,8 @@
         <a id="index_link" href="./index.html">CSSE 386</a>
         <a id="syllabus_link" href="./syllabus.html">Syllabus</a>
         <a id="schedule_link" href="./schedule.html">Schedule</a>
-        <a id="quiz_link" href="./worksheets.html">Worksheets</a>
+        <a id="quiz_link" href="./worksheets.html">Worksheets/Quizzes</a>
+        <a id="quiz_link" href="./labs.html">Labs</a>
         <a id="resources_link" href="./resources.html">Resources</a>
         <div style="clear:both;"></div>
     </div>
