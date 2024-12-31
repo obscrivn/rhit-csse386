@@ -85,7 +85,7 @@ plt.show()
 <pre>
 <code>plt.title("MyTitle", fontsize=16)</code></pre>
 </li>
-<li><p>To remove outliers, we are going to use IQR (interquartile range = remember the box in boxplot from Q1 to Q3). Note, Traditionally Q1 and Q3 are .25 and 0.75. Sometimes with outliers we use 0.5 and 0.95 to trim down the amount of data in outliers</p>
+<li><p>To remove outliers, we are going to use IQR (interquartile range = remember the box in boxplot from Q1 to Q3). Note, Traditionally Q1 and Q3 are .25 and 0.75. Sometimes with outliers we use 0.05 and 0.95 to trim down the amount of data in outliers</p>
 <pre><code>
 # applying function to all columns
 def remove_outliers(data):  
@@ -135,7 +135,7 @@ upper_bound = Q3 + 1.5*IQR
 </section>
 
 <section>
-    <h3>Step 3 Clustering (15 Points)</h3>
+    <h3>Step 3 Clustering (30 Points)</h3>
     <p>There are three standard ways to measure the nearest pair of clusters before merging them: (1) Single linkage, (2) Complete linkage, and (3) Average linkage. For more information see <a href="https://www.geeksforgeeks.org/scipy-cluster-hierarchy-dendrogram/" target="_blank">link</a></p>
     
 <ol>
