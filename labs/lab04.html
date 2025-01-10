@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CSSE 386</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" type="text/css" href="../syllabus_files/schedule.css">
+<link rel="stylesheet" type="text/css" href="../syllabus_files/screen.css">
+</head>
+<body>
+<div id="header">
+        <a id="index_link" href="../index.html">CSSE 386</a>
+        <a id="syllabus_link" href="../syllabus.html">Syllabus</a>
+        <a id="schedule_link" href="../schedule.html">Schedule</a>
+        <a id="quiz_link" href="../worksheets.html">Worksheets/Quizzes</a>
+        <a id="quiz_link" href="../labs.html">Labs</a>
+        <a id="resources_link" href="../resources.html">Resources</a>
+        <div style="clear:both;"></div>
+    </div>
+
+<div id="content">
+
+    <h1>Lab Assignment 04: House Prices Regression Analysis</h1>
+
+    <p><strong>Objective:</strong> In this lab, you will explore the Kaggle House Prices dataset to:</p>
+    <ul>
+        <li>Learn how to participate in Kaggle Competition</li>
+        <li>How to use Kaggle Notebook</li>
+                <li>Preprocess data, including handling missing values</li>
+                <li>Apply linear regression, Ridge, and Lasso</li>
+                <li>Evaluate models using MSE</li>
+                <li>Perform hyperparameter tuning</li>
+                <li>Chose the best prediction model</li>
+    </ul>
+
+    <h2>Instructions</h2>
+    <div>Provide citation for any portion that of the code that you consulted external sources. Note you cannot use genAI to generate solutions. You are ONLY allowed to debug your code with AI assistance and you must indicate clear where (which part of the code) you used the AI assitance to debug</div>
+    <p>Follow the steps below to complete the lab. Answer all questions marked as <strong>QUESTION</strong>. Submit the completed notebook on Gradescope as a public URL. Collaboration is allowed but submissions must be individual.</p>
+    <p><strong>Note:</strong> You must use the Kaggle Notebook for this Lab to prepare your for your Final Project Competition.</p>
+    <p>Make sure to add your name at the beginning of the notebook</p>
+    <p>TIP: once you complete your Lab, tidy-up your notebook and move all library imports into once coding block and rerun</p>
+    <p>Submission: code cells should be executed and show outputs. However, avoid printing the entire data just use head(), for example. If you have collaborated with another student, state their name, but the submission and the notebook must be individual (no shared URL). Set the Shared URL Link to Viewable publicly and paste the link to Gradescope assignment Lab02</p>
+    
+    <section>
+        <h3>Step 1. Housing dataset (15pts) </h3>
+        <ol>
+        <li><p>Access the competition size and join the competition <a href="https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques/overview" target="_blank">Link</a></p> </li>
+        <li><p>Scroll down to download data (Select Download all)</p>
+        <li><p>Create a new notebook:</p>
+        <p><img height="100pt" src="./kaggle.png"/></p></li>
+        <li><p>Rename your notebook to Lab04LastName</p></li>
+        <li><p>Expand the right sidebar: you should see Input and Upload</p>
+        <p><img height="100pt" src="./upload.png"/></p></li>
+        <li><p>Upload zip, keep data private, you can use the same name, and then create (see the screenshot below)</p>
+        <p><img height="100pt" src="./zip.png"/></p></li>
+        <li><p>Now you have your dataset ready and you can load it using kagglehub</p>
+            <p><img height="100pt" src="./dots.png"/></p>
+            <p><img height="100pt" src="./kagglehub.png"/></p></li>
+    <code><pre>import os
+import kagglehub
+#paste the kagglehub path
+</pre></code>
+   <li> <p>Now you should be able to get a path to train.csv</p>
+<code><pre>
+   # Paths to train file
+train_path = '/kaggle/input/house-prices-advanced-regression-techniques/train.csv'
+
+</pre></code></li>
+   <li> <p>Create a train_data dataframe</p></li>
+<li><p> Display the first 5 columns</p></li>
+<li><p> Check for null values. Note by default Pandas will not display all columns. So you will not be able to see all columns with null.  TIP: you can filter data and display only columns with null counts greater than zero.</p></li>
+
+</ol>
+</section>
+<div><strong>Questions</strong>
+<ul>
+<li>Name top three columns with missing data.</li>
+</ul>
+</div>
+</section>
+<section>
+<h3>Step 2: Preprocessing (20 Points)</h3>
+            <ol>
+                <li><p>Drop columns from train data with more than 20% missing values.</p>
+<code><pre>
+# HINT: Create a threshold with the value of what 0.2 from the total train data length is
+# Create a new cleaned train data (train_data_cleaned) using .loc() where the sum of nulls is equal or less than threshold
+# Print drop columns
+dropped_columns = train_data.columns[train_data.isnull().sum() > threshold]
+print(f"Dropped columns: {dropped_columns.tolist()}")
+</pre></code>                
+                </li>
+                <li><p>Fill remaining missing values with the mean (numerical) or mode (categorical).</p>
+<code><pre>
+# HINT: run train_data_cleaned.info() to see data types
+# float64 and int64 are numerical types; object is a categorical type
+# Separate columns using these types:
+# Separate numerical and categorical columns
+numerical_columns = train_data_cleaned.select_dtypes(include=['float64', 'int64']).columns
+categorical_columns = train_data_cleaned.select_dtypes(include=['object']).columns
+# Use numerical columns to fill na with the mean
+train_data_cleaned[numerical_columns] = # complete the rest
+# Fill categorical columns with the mode
+for column in categorical_columns:
+    mode_value = train_data_cleaned[column].mode()[0]  # Get the first most frequent value
+    train_data_cleaned[column] = # Complete the rest
+# Verify no missing values remain
+</pre></code> 
+</li>
+<li><p>Encode categorical variables using one-hot encoding.</p>
+    <strong>One-hot encoding</strong> is a technique used to convert categorical variables (e.g., strings or labels) into a numerical 
+    format that machine learning models can process.
+    <p>But instead of assigning numbers like Red = 1, Blue = 2, Green = 3, each category will be represented as a binary vector 0 or 1</p>
+    <table border="1">
+        <tr>
+            <th>Color</th>
+        </tr>
+        <tr>
+            <td>Red</td>
+        </tr>
+        <tr>
+            <td>Blue</td>
+        </tr>
+        <tr>
+            <td>Green</td>
+        </tr>
+        <tr>
+            <td>Red</td>
+        </tr>
+    </table>
+
+    <p>After applying one-hot encoding, this column would be transformed into three new columns:</p>
+    <table border="1">
+        <tr>
+            <th>Red</th>
+            <th>Blue</th>
+            <th>Green</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+    </table>
+</li>
+<li><p>Calculate how many new one-hot encoded columns are created</p>
+<code><pre>
+num_new_columns = train_data_encoded.shape[1] - train_data_encoded.shape[1] + len(categorical_columns)
+print(f"Number of new columns created: {num_new_columns}")
+</pre></code> </li>
+<li><p>Normalize the numerical features using <strong>StandardScaler</strong>. Apply normalization to train_data_encoded.</p></li>
+<li><p>Display the first five columns for train_data_encoded</p></li>
+<li><p>You may want to also use <code>train_data_encoded = train_data_encoded.dropna()</code> in case if you missed any nulls</p></li>
+<li><p>Create X and y. Remember your target is SalePrice </p></li>
+<li><p>Split train_data_encoded into train and test. You can chose 80-20 or 70-30.</p>
+
+</ol>
+<div><strong>Questions</strong>
+                    <ul>
+                    <li>How many columns did you drop?</li>
+                    <li>How many new columns were created by one-hot encoding?</li>
+                    <li>Explain: Why is one-hot encoding better than assigning numerical labels arbitrarily?</li>
+                    <li>Explain: Why z-score is a more preferred normalization method for this dataset?</li>
+                    
+                </ul>
+                    </div>
+
+            </section>        
+            <section>
+                <h3>Step 3: Baseline Linear Regression (15 Points)</h3>
+                <ol>
+                    
+                    <li><p>Train a baseline linear regression model using the training set.</p></li>
+                    <li><p>Evaluate the model using MSE. Display the results.</p></li>
+                    
+                </ol>
+<div><strong>Questions</strong>
+<ul>
+    <li>How did the baseline model perform?</li>
+      
+</ul>
+</section> 
+<section>      
+<h3>Step 4: Regularized Regression (Ridge and Lasso) (20 Points)</h3>
+            <ol>
+                <li><p>Train Ridge and Lasso regression models with default hyperparameters.</p></li>
+                <li><p>Evaluate the models using MSE. Compare with the baseline model.</p></li>
+                <li><p>Use GridSearchCV to tune the regularization parameter (<strong>alpha</strong>) for Ridge and Lasso.</p>   
+<code><pre>
+from sklearn.model_selection import GridSearchCV
+param_grid = {'alpha': [0.01, 0.1, 1, 10, 100]}
+ridge_grid = GridSearchCV(Ridge(), param_grid, scoring='neg_mean_squared_error', cv=5)
+ridge_grid.fit(X_train, y_train)
+    
+lasso_grid = GridSearchCV(Lasso(), param_grid, scoring='neg_mean_squared_error', cv=5)
+lasso_grid.fit(X_train, y_train)
+    
+print("Best Ridge alpha:", ridge_grid.best_params_['alpha'])
+print("Best Lasso alpha:", lasso_grid.best_params_['alpha'])
+</pre></code>
+</li>
+</ol>
+</section>
+<section>
+    <h3>Step 5: Model Comparison (15 Points)</h3>
+    <p>Compare the performance of all models (Linear, Ridge, Lasso, and Polynomial). Summarize their strengths and weaknesses based on metrics and visualizations.</p>
+    <div><strong>Questions</strong>   
+    <ul>
+        <li>Which model would you choose for this dataset and why?</li>
+        <li>What did you learn from this Lab?</li>
+    </ul>
+    </div>
+</section>
+<section>
+<h3>Grading Rubrics</h3>
+        <ol>
+        <li>Step 1 Housing Dataset 15pts (all questions are answered)</li> 
+        <li>Step 2 Preprocessing 25pts</li>
+        <li>Step 3 Baseline 15pts </li>
+        <li>Step 4 Regularization 20pts (all questions are answered) </li>
+        <li>Step 5 Comparison 15pts (all questions are answered) </li>
+        <li>Submission, Code, Format, Help citation (10 Points)</li>
+        </ol>
+</section>
+                </body>
+                </html>
