@@ -157,9 +157,15 @@ for column in categorical_columns:
             <td>0</td>
         </tr>
     </table>
+
+    <p>Pandas <code>.get_dummies()</code>takes 2 arguments your train_clean_data and set columns equal to categorical_columns</p>
 </li>
+<code><pre>
+train_data_encoded = pd.get_dummies(# complete the rest) 
+</pre></code>   
 <li><p>Calculate how many new one-hot encoded columns are created</p>
 <code><pre>
+ 
 num_new_columns = train_data_encoded.shape[1] - train_data_encoded.shape[1] + len(categorical_columns)
 print(f"Number of new columns created: {num_new_columns}")
 </pre></code> </li>
