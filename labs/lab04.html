@@ -106,6 +106,7 @@ for column in categorical_columns:
     train_data_cleaned[column] = # Complete the rest
 # Verify no missing values remain
 </pre></code> 
+<p>If you get a warning about a copy/slice dataframe, you can use this format instead with .loc[row,column]: <code>train_data_cleaned.loc[:, numerical_columns]</code></p>
 </li>
 <li><p>Encode categorical variables using one-hot encoding.</p>
     <strong>One-hot encoding</strong> is a technique used to convert categorical variables (e.g., strings or labels) into a numerical 
