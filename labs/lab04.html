@@ -196,7 +196,25 @@ print(f"Number of new columns created: {num_new_columns}")
 </section> 
 <section>      
 <h3>Step 4: Regularized Regression (Ridge and Lasso) (20 Points)</h3>
-            <ol>
+<p>Hyper-parameters are parameters that are not directly learnt within estimators. In scikit-learn they are passed as 
+    arguments to the constructor of the estimator classes, like alpha for Lasso.</p>
+    <p>It is recommended to search the hyper-parameter space for the best score. GridSearchCV is a common approach to parameter search: 
+        for given values, GridSearchCV exhaustively considers all parameter combinations</p>
+        <p>We are going to use a grid search from sklearn to find the best value of the regularization parameter alpha for a Ridge regression model using cross-validation</p>
+           <p>We define parameters alpha like this: <code>param_grid = {'alpha': [0.01, 0.1, 1, 10, 100]}</code></p> 
+           <p><strong>Alpha</strong> is the regularization strength for Ridge regression:
+            Smaller values of alpha: Less regularization, allowing the model to fit the data more closely (potentially overfitting).
+            Larger values of alpha: More regularization, which penalizes large coefficients, reducing overfitting.</p>
+        <p>Then we use grid<code>ridge_grid = GridSearchCV(Ridge(), param_grid, scoring='neg_mean_squared_error', cv=5)</code>. It Automates the process of trying multiple hyperparameter combinations and 
+            selects the best one based on a scoring metric</p>
+            <p>We use <code>scoring='neg_mean_squared_error'</code> because GridSearchCV maximizes the scoring metric, but we need to minimizes MSE so we can maximize its negative.</p>
+               <p>We use <code>cv=5</code> which is <strong>Cross-validation</strong>  with 5 folds:</p>
+               <ul>
+               <li>Splits the training data into 5 parts (folds)</li>
+                <li>Trains the model on 4 parts and evaluates it on the remaining 1 part</li>
+                <li>Repeats this process 5 times, each time using a different fold as the validation set</li>
+            </ul>
+                <ol>
                 <li><p>Train Ridge and Lasso regression models with default hyperparameters.</p></li>
                 <li><p>Evaluate the models using MSE. Compare with the baseline model.</p></li>
                 <li><p>Use GridSearchCV to tune the regularization parameter (<strong>alpha</strong>) for Ridge and Lasso.</p>   
