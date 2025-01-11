@@ -25,7 +25,7 @@
     <ul>
         <li>Learn how to participate in Kaggle Competition</li>
         <li>How to use Kaggle Notebook</li>
-                <li>Preprocess data, including handling missing values</li>
+                <li>Preprocess data, including one-hot encoding</li>
                 <li>Apply linear regression, Ridge, and Lasso</li>
                 <li>Evaluate models using MSE</li>
                 <li>Perform hyperparameter tuning</li>
@@ -159,7 +159,7 @@ for column in categorical_columns:
         </tr>
     </table>
 
-    <p>Pandas <code>.get_dummies()</code>takes 2 arguments your train_clean_data and set columns equal to categorical_columns</p>
+    <p>Pandas <code>.get_dummies()</code>takes 2 arguments: train_clean_data and columns names. Set columns equal to categorical_columns</p>
 </li>
 <code><pre>
 train_data_encoded = pd.get_dummies(# complete the rest) 
