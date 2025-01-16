@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+    <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>CSSE 386</title>
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="./syllabus_files/screen.css">
+    <link rel="stylesheet" type="text/css" href="./syllabus_files/schedule.css">
+    
+    </head>
+    <body>
+    <div id="header">
+            <a id="index_link" href="./index.html">CSSE 386</a>
+            <a id="syllabus_link" href="./syllabus.html">Syllabus</a>
+            <a id="schedule_link" href="./schedule.html">Schedule</a>
+            <a id="quiz_link" href="./worksheets.html">Worksheets/Quizzes</a>
+            <a id="quiz_link" href="./labs.html">Labs</a>
+            <a id="resources_link" href="./resources.html">Resources</a>
+            <div style="clear:both;"></div>
+        </div>
+    
+    <div id="content">
+    <h1>CSSE386 Data Mining Exam 1 Review Study Guide</h1>
+    <p>This study guide covers key concepts, techniques, and example questions to prepare for Exam 1 in your Data Mining course CSSE386. Review each section carefully and check the solutions at the end.</p>
+    <hr>
+    <h2>Allowed Material</h2>
+    <ol>
+        <li>1 sheet (2 sides) written notes</li>
+        <li> 2 printed handouts (see under Resources)
+            </li>
+            </ol>
+    <h2>1. Data Processing and Cleaning</h2>
+    <h3>Key Topics:</h3>
+    <ul>
+        <li>Handling missing data (e.g., imputation, removal).</li>
+        <li>Removing duplicates and outliers.</li>
+        <li>Standardization vs. normalization.</li>
+    </ul>
+    <h3>Example Questions:</h3>
+    <ol>
+        <li><strong>True/False</strong>: Normalization rescales data to a range of [0, 1].</li>
+        <li><strong>Fill in the Blanks</strong>: Imputing missing values is often preferred when the proportion of missing data is _____________. (hint: high or low)</li>
+        <li><strong>Multiple Choice</strong>: Which method is most appropriate for imputing missing numerical data?
+            <ul>
+                <li>a) Mean imputation</li>
+                <li>b) Mode imputation</li>
+                <li>c) Deleting the row</li>
+                <li>d) Using a median filter</li>
+            </ul>
+        </li>
+    </ol>
+    <hr>
+
+    <h2>2. Data Visualization</h2>
+    <h3>Key Topics:</h3>
+    <ul>
+        <li>Types of visualizations (e.g., scatter plots, histograms, box plots).</li>
+        <li>Identifying trends and outliers through visualizations.</li>
+    </ul>
+    <h3>Example Questions:</h3>
+    <ol>
+        <li><strong>Short Answer</strong>: What type of visualization is best suited to examine the distribution of numerical features?</li>
+        <li><strong>True/False</strong>: Box plots are used to visualize the relationship between two categorical variables.</li>
+    </ol>
+    <hr>
+
+    <h2>3. Unsupervised Learning</h2>
+    <h3>Key Topics:</h3>
+    <ul>
+        <li><strong>K-Means Clustering</strong>:
+            <ul>
+                <li>Choosing the number of clusters (“k”).</li>
+                <li>Interpret the results of the clustering.</li>
+            </ul>
+        </li>
+        <li><strong>Hierarchical Clustering</strong>:
+            <ul>
+                <li>Dendrograms.</li>
+                
+            </ul>
+        </li>
+    </ul>
+    <h3>Example Questions:</h3>
+    <ol>
+        <li><strong>True/False</strong>: In K-means, clusters are initialized randomly.</li>
+        <li><strong>Multiple Choice</strong>: Which of the following measures is commonly used in K-means clustering?
+            <ul>
+                <li>a) Manhattan distance</li>
+                <li>b) Euclidean distance</li>
+                <li>c) Cosine similarity</li>
+                <li>d) Hamming distance</li>
+            </ul>
+        </li>
+        <li><strong>Short Answer</strong>: What does a dendrogram represent in hierarchical clustering?</li>
+    </ol>
+    <hr>
+
+    <h2>4. Supervised Learning</h2>
+    <h3>Key Topics:</h3>
+    <ul>
+        <li><strong>Regression</strong>:
+            <ul>
+                <li>Linear regression and interpreting coefficients.</li>
+                <li>Mean Squared Error (MSE).</li>
+            </ul>
+        </li>
+        <li><strong>Classification Methods</strong>:
+            <ul>
+                <li>Decision Trees: Splitting criteria and depth.</li>
+                <li>k-NN: Distance metrics and choosing \(k\).</li>
+                <li>SVM: Margin and kernel functions.</li>
+                <li>Naive Bayes: Assumptions and probabilities.</li>
+            </ul>
+        </li>
+    </ul>
+    <h3>Example Questions:</h3>
+    <ol>
+        <li><strong>True/False</strong>: Linear regression is sensitive to outliers.</li>
+        <li><strong>Fill in the Blanks</strong>: SVM is effective for _____________ data (hint: low or high dimensional).</li>
+        <li><strong>Multiple Choice</strong>: A typical value of k in k-NN is:
+            <ul>
+                <li>a) 0</li>
+                <li>b) 5</li>
+                <li>c) 2</li>
+                <li>d) 100</li>
+            </ul>
+        </li>
+    </ol>
+    <hr>
+
+    <h2>5. Confusion Matrix and Performance Metrics</h2>
+    <h3>Key Topics:</h3>
+    <ul>
+        <li>Confusion matrix: TP, TN, FP, FN.</li>
+        <li>Precision, recall, accuracy.</li>
+        <li>Evaluation metrics for regression (e.g., MSE).</li>
+    </ul>
+    <h3>Example Questions:</h3>
+    <ol>
+        <li><strong>Fill in the Blanks</strong>: Recall is defined as the fraction of _____________ that are correctly predicted.</li>
+        <li><strong>True/False</strong>: The confusion matrix is applicable only to binary classification tasks.</li>
+        <li><strong>Problem</strong>: Given the following confusion matrix, identify TP, TN, FP, FN:
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Predicted Positive</th>
+                        <th>Predicted Negative</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Actual Positive</strong></td>
+                        <td>50</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Actual Negative</strong></td>
+                        <td>5</td>
+                        <td>35</td>
+                    </tr>
+                </tbody>
+            </table>
+        </li>
+        <li><strong>Short Answer</strong>: Why might accuracy not be a reliable metric for imbalanced datasets?</li>
+    </ol>
+    <hr>
+
+    <h2>6. Missing Data</h2>
+    <h3>Key Topics:</h3>
+    <ul>
+        <li>Methods to handle missing data (mean, median, mode imputation).</li>
+        <li>Impact of missing data on analysis.</li>
+    </ul>
+    <h3>Example Questions:</h3>
+    <ol>
+        <li><strong>True/False</strong>: Imputation always improves the model performance.</li>
+        <li><strong>Fill in the Blanks</strong>: Dropping columns with missing values is effective when the proportion of missing data is _____________.</li>
+    </ol>
+    <hr>
+
+    <h3>General Tips for Exam Preparation</h3>
+    <ol>
+        <li>Review Lecture Notes: Focus on definitions, key formulas, and algorithms.</li>
+        <li>Practice Problems: Solve problems similar to the examples provided here.</li>
+        <li>Understand the Concepts: Avoid memorization; aim to understand the "why" behind each method.</li>
+    </ol>
+    <p>Good luck with your exam preparation!</p>
+    <hr>
+
+    <h2>Answers</h2>
+    <ul>
+        <li><strong>1. Data Processing and Cleaning</strong>
+            <ol>
+                <li>True</li>
+                <li>Low</li>
+                <li>a) Mean imputation</li>
+            </ol>
+        </li>
+        <li><strong>2. Data Visualization</strong>
+            <ol>
+                <li>Histograms</li>
+                <li>False</li>
+            </ol>
+        </li>
+        <li><strong>3. Unsupervised Learning</strong>
+            <ol>
+                <li>True</li>
+                <li>b) Euclidean distance</li>
+                <li>A dendrogram represents the hierarchical relationships between clusters.</li>
+            </ol>
+        </li>
+        <li><strong>4. Supervised Learning</strong>
+            <ol>
+                <li>True</li>
+                <li>high-dimensional</li>
+                <li>b) 5</li>
+            </ol>
+        </li>
+        <li><strong>5. Confusion Matrix and Performance Metrics</strong>
+            <ol>
+                <li>True Positives (TP) / (TP + FN)</li>
+                <li>False</li>
+                <li>TP:50, TN: 35, FN: 10, FP: 5</li>
+                <li>Because it does not account for class imbalance.</li>
+            </ol>
+        </li>
+        <li><strong>6. Missing Data</strong>
+            <ol>
+                <li>False</li>
+                <li>High</li>
+            </ol>
+        </li>
+    </ul>
+</body>
+</html>
