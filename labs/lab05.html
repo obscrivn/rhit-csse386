@@ -109,11 +109,23 @@ plt.show()
                     <li><p>Import a KNN classifier.</p>  
                     <li><p>Train a KNN classifier <code>from sklearn.neighbors import KNeighborsClassifier</code></p></li>
 <li><p>Assign  <code>k=3</code> </p>
+    <p>Note: k=3 is a commonly chosen starting point.  
+        You will later explore how to find the best k.</p>
 <pre><code>
 from sklearn.model_selection import cross_val_score
-# Train model
-model = KNeighborsClassifier(n_neighbors=k)
-model.fit(X_train, y_train)
+# Train model Example (no cross-validation)
+# K-Nearest Neighbors with k=3
+knn_model_k3 = KNeighborsClassifier(n_neighbors=3)
+knn_model_k3.fit(X_train, y_train)
+y_pred_knn_k3 = knn_model_k3.predict(X_test)
+
+# Evaluate KNN with k=3
+print("KNN (k=3) Evaluation:")
+print(f"Accuracy: {accuracy_score(y_test, y_pred_knn_k3):.4f}")
+print(f"Precision: {precision_score(y_test, y_pred_knn_k3, average='weighted'):.4f}")
+print(f"Recall: {recall_score(y_test, y_pred_knn_k3, average='weighted'):.4f}")
+ConfusionMatrixDisplay.from_predictions(y_test, y_pred_knn_k3)
+plt.show()
 </code></pre>
 </li>
 <li><p>Import cross-validation <code>from sklearn.model_selection import cross_val_score</code></p></li>
@@ -125,7 +137,31 @@ print(f"Mean score: {scores.mean()}")</code></pre>
 
 </li>
 <li><p>Learn how to set a range of k and determine the best value, see Reading: <a href="https://www.geeksforgeeks.org/how-to-find-the-optimal-value-of-k-in-knn/">Best K</a></p></li>
-<li><p>Implement the code from the reading and plot the decision boundary</p></li>                 
+                 
+<li><p>Here is an example how you can loop over several odd k values and use cross-validation technique:
+</p>
+<pre><code>
+#select the range, for example from 1 to 21
+k_values = range(1, 21, 2)
+# create an array to get the average metrics for each fold
+mean_scores = []
+
+for k in k_values:
+    knn_model = KNeighborsClassifier(n_neighbors=k)
+    scores = cross_val_score(knn_model, X_train, y_train, cv=5)
+    mean_scores.append(scores.mean()) 
+</code></pre>
+</li>
+
+<li><p>Find the best score (remember to import numpy) and print it:</p>
+<pre><code>best_k = k_values[np.argmax(mean_scores)]
+    print(f"Best k: {best_k}, Accuracy: {max(mean_scores):.4f}")
+</code></pre></li>
+<li>Train KNN on the best_k (see how it was done with k=3) and display the evaluation metrics</li>
+<li><p>Bonus: Decision boundaries are typically visualized in 2D or 3D. Plot the decision boundary with 13 features 
+    is not feasible and we learn soon how to do PCA (dimensionality reduction). 
+    To visualize plot for now, choose 2 features only, for examle (you can manually choose two features from the dataset (e.g., alcohol and malic_acid)). 
+    Then you have to retrain your KNN and follow the example from the provided document to visualize the plot</p></li>
 </ol>
 <div><strong>Questions</strong>
 <ul>
