@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CSSE 386</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" type="text/css" href="../syllabus_files/schedule.css">
+<link rel="stylesheet" type="text/css" href="../syllabus_files/screen.css">
+</head>
+<body>
+<div id="header">
+        <a id="index_link" href="../index.html">CSSE 386</a>
+        <a id="syllabus_link" href="../syllabus.html">Syllabus</a>
+        <a id="schedule_link" href="../schedule.html">Schedule</a>
+        <a id="quiz_link" href="../worksheets.html">Worksheets/Quizzes</a>
+        <a id="quiz_link" href="../labs.html">Labs</a>
+        <a id="resources_link" href="../resources.html">Resources</a>
+        <div style="clear:both;"></div>
+    </div>
+
+<div id="content">
+
+    <h1>Lab Assignment 05: Classification with the Wine Dataset</h1>
+
+    <p><strong>Objective:</strong> In this lab, you will 
+        train and evaluate classification models (Naive Bayes, KNN, Decision Tree, and SVM) using the Wine dataset</p>
+    
+
+    <h2>Instructions</h2>
+    <p>Create your Colab notebook</p>
+    <div>Provide citation for any portion that of the code that you consulted external sources. Note you cannot use genAI to generate solutions. You are ONLY allowed to debug your code with AI assistance and you must indicate clear where (which part of the code) you used the AI assitance to debug</div>
+    <p>Follow the steps below to complete the lab. 
+        Answer all questions marked as <strong>QUESTION</strong>. 
+        Submit the completed notebook on Gradescope as a public URL. 
+        Collaboration is allowed but submissions must be individual.</p>
+    <p>Make sure to add your name at the beginning of the notebook</p>
+    <p>TIP: once you complete your Lab, tidy-up your notebook and 
+        move all library imports into once coding block and rerun</p>
+    <p>Submission: code cells should be executed and show outputs. 
+        However, avoid printing the entire data just use head(), for example. 
+        If you have collaborated with another student, state their name, but the submission and the notebook must be individual (no shared URL). 
+        Set the Shared URL Link to Viewable publicly and paste the link to 
+        Gradescope assignment</p>
+    
+    <section>
+        <h3>Step 1. Wine dataset (15pts) </h3>
+        <ol>
+            <li> <p>Load the Wine dataset using <code>sklearn.datasets.load_wine()</code>  </p></li>
+            <li> <p>Explore the dataset to understand the features and target classes</p></li>
+         <li><p> Choose the right plot to examine the classes distributions. For example, you should be able to check if classes are balanced.</p></li>
+         <li><p>Check if you have any missing values. If yes, apply any relevant standard approach to deal with NA.</p></li>
+         <li><p> Normalize dataset using <code>StandardScaler</code></p></li>
+         <li><p>Split the dataset into training and testing sets. Suggested split ratio: 80% training, 20% testing</p></li>
+         </ol>
+</section>
+<div><strong>Questions</strong>
+<ul>
+<li>How many classes are in the dataset?</li>
+<li>Which column will you use as a target (y)? Provide its name.</li>
+<li>What type of features do you have (categorical, continuous..) and how many features?</li>
+</ul>
+</div>
+</section>
+<section>
+<h3>Step 2: Naive Bayes (NB) (20pts)</h3>
+            <ol>
+                <li><p>Import Gaussian NB 
+                    <code>from sklearn.naive_bayes import GaussianNB</code></p> <p>You can also consult the sklearn documentation: <a href="https://scikit-learn.org/1.6/modules/generated/sklearn.naive_bayes.GaussianNB.html">GaussianNB</a></p>
+                </li>
+                <li><p>Import evaluation metrics <code>from sklearn.metrics import accuracy_score, precision_score, recall_score, ConfusionMatrixDisplay</code></p></li>
+                <li><p>Train model. As you learned from regression, sklearn has the same pipeline: fit, predict</p>
+<pre><code># Train
+model = GaussianNB()
+model.fit(X_train, y_train)   
+# Predict
+y_pred = model.predict(X_test)
+</code></pre>
+</li>
+
+<li><p>Apply the evaluation metrics. These metrics will be similar for other classifiers to use.</p>
+    <p>For precision, we use weighted average since we are dealing wil multiclass classification. 
+        By default, precision_score calculates precision for each class individually. 
+        By specifying average='weighted', the metric combines these per-class precision scores into a single number.</p>
+<code><pre>
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred, average='weighted')
+recall = recall_score(y_test, y_pred, average='weighted')
+    
+print(f"Accuracy: {accuracy}")
+print(f"Precision: {precision}")
+print(f"Recall: {recall}")
+# Confusion matrix
+ConfusionMatrixDisplay.from_predictions(y_test, y_pred)
+plt.show()
+</pre></code>                
+                </li>
+</ol>
+                <div><strong>Questions</strong>
+                    <ul>
+                        <p>What do the confusion matrix and metrics tell you about model performance?</p>
+                        <p>Why do you think Gaussian Naive Bayes is an appropriate choice for this dataset?</p>     
+                </ul>
+                    </div>
+
+            </section> 
+      
+            <section>
+                <h3>Step 3: KNN (20 Points)</h3>
+                <ol>
+                    <li><p>Import a KNN classifier.</p>  
+                    <li><p>Train a KNN classifier <code>from sklearn.neighbors import KNeighborsClassifier</code></p></li>
+<li><p>Assign  <code>k=3</code> </p>
+<pre><code>
+from sklearn.model_selection import cross_val_score
+# Train model
+model = KNeighborsClassifier(n_neighbors=k)
+model.fit(X_train, y_train)
+</code></pre>
+</li>
+<li><p>Import cross-validation <code>from sklearn.model_selection import cross_val_score</code></p></li>
+<li><p>Evaluate the model using K-fold cross-validation, using 5 folds</p>
+<pre><code>
+scores = cross_val_score(KNeighborsClassifier(), X_train, y_train, cv=5)
+print(f"Cross-validation scores: {scores}")
+print(f"Mean score: {scores.mean()}")</code></pre>
+
+</li>
+<li><p>Learn how to set a range of k and determine the best value, see Reading: <a href="https://www.geeksforgeeks.org/how-to-find-the-optimal-value-of-k-in-knn/">Best K</a></p></li>
+<li><p>Implement the code from the reading and plot the decision boundary</p></li>                 
+</ol>
+<div><strong>Questions</strong>
+<ul>
+    <li><p>What is the best value of <code>k</code> for this dataset?</p></li>
+      
+</ul>
+</section> 
+<section>      
+<h3>Step 4: Decision Tree (20 Points)</h3>
+               <ol>
+               <li><p>Import Decision Tree <code>from sklearn.tree import DecisionTreeClassifier</code></p></li>
+<li><p>Train the model (see <a href="https://scikit-learn.org/dev/modules/generated/sklearn.tree.DecisionTreeClassifier.html">Documentation</a>) </p>
+    <p>Set max depth to 3: "max_depth" refers to a hyperparameter that controls the maximum depth or number of levels a tree can grow to during training</p>
+<pre><code>
+# Train model
+model = DecisionTreeClassifier(max_depth=3)
+model.fit(X_train, y_train)
+</code></pre>
+</li>
+<li><p>Import plot_tree
+<code>from sklearn.tree import plot_tree</code></p>
+</li>
+<li><p>Plot Decision tree, using this <a href="https://www.geeksforgeeks.org/changing-colors-for-decision-tree-plot-using-sklearn-plot-tree/">Documentation</a></p>
+<li><p>Modify the tree depth and create another plot</p></li>
+<li><p>Do not forget to evaluate the model</p></li>
+</ol>
+</section>
+<div><strong>Questions</strong>   
+    <ul>
+        <p>How does the tree depth affect performance and interpretability?</p></li>
+    </ul>
+    </div>
+<section>
+    <h3>Step 5: SVM (20 Points)</h3>
+    <ol>
+        <li><p>Import SVM <code>from sklearn.svm import SVC </code></p></li>
+<li><p>Train an SVM with a linear kernel</p>
+<pre><code># Train model
+model = SVC(kernel='linear')
+model.fit(X_train, y_train)</code></pre>
+</li>    
+    
+<li><p>Experiment with other kernels (see <a href="https://www.geeksforgeeks.org/major-kernel-functions-in-support-vector-machine-svm/">Documentation</a>).</p></li>
+<li>Predict and evaluate the model for each kernel you choose</li>
+</ol> 
+    
+        <div><strong>Questions</strong>   
+    <ul>
+        <li><p>Which kernel performs best, and why?</p></li>
+    </ul>
+    </div>
+
+    <h3>Step 6: Reflections</h3>  
+    <ul>
+        <li><p>What did you learn in this Lab? </p></li>  
+        <li><p>What was the most interesting (for example, specific model, evalution etc)</p></li>
+        <li><p>Do you feel comfortable using classifiers? Do you feel you gained useful practical experience?</p></li>
+    </ul>
+
+</section>
+<section>
+
+<h3>Grading Rubrics</h3>
+        <ol>
+        <li>Step 1 Wine Dataset 10pts</li> 
+        <li>Step 2 NB 20pts</li>
+        <li>Step 3 KNN 20pts </li>
+        <li>Step 4 Decision Tree 20pts </li>
+        <li>Step 5 SVM 20pts </li>
+        <li>Submission, Code, Format, Help citation (10 Points)</li>
+        </ol>
+</section>
+                </body>
+                </html>
