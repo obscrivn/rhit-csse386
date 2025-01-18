@@ -77,7 +77,7 @@ y_pred = model.predict(X_test)
 </li>
 
 <li><p>Apply the evaluation metrics. These metrics will be similar for other classifiers to use.</p>
-    <p>For precision, we use weighted average since we are dealing wil multiclass classification. 
+    <p>For precision, we use weighted average since we are dealing with multiclass classification. 
         By default, precision_score calculates precision for each class individually. 
         By specifying average='weighted', the metric combines these per-class precision scores into a single number.</p>
 <code><pre>
@@ -158,9 +158,9 @@ for k in k_values:
 print(f"Best k: {best_k}, Accuracy: {max(mean_scores):.4f}")
 </code></pre></li>
 <li>Train KNN on the best_k (see how it was done with k=3) and display the evaluation metrics</li>
-<li><p>Bonus: Decision boundaries are typically visualized in 2D or 3D. Plot the decision boundary with 13 features 
+<li><p>Bonus: Decision boundaries are typically visualized in 2D or 3D. Plotting the decision boundary with 13 features 
     is not feasible and we learn soon how to do PCA (dimensionality reduction). 
-    To visualize plot for now, choose 2 features only, for examle (you can manually choose two features from the dataset (e.g., alcohol and malic_acid)). 
+    To visualize plot for now, choose 2 features only, for example (you can manually choose two features from the dataset (e.g., alcohol and malic_acid)). 
     Then you have to retrain your KNN and follow the example from the provided document to visualize the plot</p></li>
 </ol>
 <div><strong>Questions</strong>
@@ -217,7 +217,7 @@ model.fit(X_train, y_train)</code></pre>
     <h3>Step 6: Reflections</h3>  
     <ul>
         <li><p>What did you learn in this Lab? </p></li>  
-        <li><p>What was the most interesting (for example, specific model, evalution etc)</p></li>
+        <li><p>What was the most interesting (for example, specific model, evaluation etc)</p></li>
         <li><p>Do you feel comfortable using classifiers? Do you feel you gained useful practical experience?</p></li>
     </ul>
 
