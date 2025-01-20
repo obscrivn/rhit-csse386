@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CSSE 386</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" type="text/css" href="../syllabus_files/schedule.css">
+<link rel="stylesheet" type="text/css" href="../syllabus_files/screen.css">
+</head>
+<body>
+<div id="header">
+        <a id="index_link" href="../index.html">CSSE 386</a>
+        <a id="syllabus_link" href="../syllabus.html">Syllabus</a>
+        <a id="schedule_link" href="../schedule.html">Schedule</a>
+        <a id="quiz_link" href="../worksheets.html">Worksheets/Quizzes</a>
+        <a id="quiz_link" href="../labs.html">Labs</a>
+        <a id="resources_link" href="../resources.html">Resources</a>
+        <div style="clear:both;"></div>
+    </div>
+
+<div id="content">
+
+    <h1>Homework 1. Data-Driven Insights: Transforming Raw Data into Business Solutions</h1>
+
+    
+        <p>Objective:</p>
+        <ul>
+            <li>Provide hands-on experience with exploring and preprocessing datasets</li>
+            <li>Develop skills in applying descriptive and predictive data mining methods</li>
+            <li>Encourage critical thinking about data insights and their potential applications</li>
+            <li>Foster the ability to create business-relevant recommendations based on data analysis</li>
+        </ul>
+        
+        <h2>Instructions</h2>
+        <p>This is an individual assignment. No collaboration is allowed.</p>
+        <p>Students are required to choose a dataset of their own interest and apply data mining techniques as outlined below. The dataset must be appropriate for Data Mining tasks and selected from the provided repositories below. 
+            </p>
+
+            <p><strong>Provide reference/citation to any method, metric, function that had not been covered in class.</strong> For any methods/code covered in class Labs, you do not need to provide references.</p>
+        
+        <h3>1. Dataset Description and Exploratory Data Analysis (20 points)</h3>
+        <ul>
+            <li><strong>Helpful Dataset Resources</strong>
+        <ul>
+            <li><a href="https://www.kaggle.com/datasets" target="_blank">Kaggle Datasets</a></li>
+            <li><a href="https://scikit-learn.org/stable/datasets.html" target="_blank">Scikit-learn Datasets</a></li>
+            <li><a href="https://archive.ics.uci.edu/ml/index.php" target="_blank">UCI Machine Learning Repository</a></li>
+        </ul>
+        </li>
+
+            <li><strong>Dataset Documentation</strong>
+                <ul>
+                    <li>Provide the origin of the dataset (who collected it, when, and for what purpose)</li>
+                    <li>Include a link to the dataset</li>
+                </ul>
+            </li>
+            <li><strong>Data Description</strong>
+                <ul>
+                    <li>Describe the dataset size, types of columns, and any missing data</li>
+                    <li>Identify the target variable and features</li>
+                    <li>Discuss multicollinearity among features (e.g., correlation)</li>
+                    <li>Analyze the target variable's distribution (e.g., skewness, imbalance)</li>
+                    <li>Provide your conclusion on what dta amining techniques will be appropriate for this dataset. Recall that some methods (e.g. Linear regression, decision trees) require certain assumptions about data distribution and balance.</li>
+                </ul>
+            </li>
+            <li><strong>Written Explanation:</strong> Provide clear written answers to the above questions supported by visualizations (e.g., histograms, correlation heatmaps).</li>
+        </ul>
+        
+        <h3>2. Data Preprocessing (15 points)</h3>
+        <ul>
+            <li><strong>Normalization and Cleaning:</strong>
+                <ul>
+                    <li>Describe the normalization methods used</li>
+                    <li>Explain how missing data was cleaned</li>
+                    <li>List any additional cleaning steps, 
+                        such as dropping unnecessary columns (e.g., IDs, invoice numbers) or renaming columns</li>
+                </ul>
+            </li>
+            <li><strong>Feature Selection:</strong> Justify whether all features were used or if any were excluded.</li>
+            <li><strong>Data Splitting:</strong> Explain how the data was split for analysis (e.g., training and testing sets for predictive methods). Note: Splitting may not be necessary for descriptive methods like clustering.</li>
+        </ul>
+        
+        <h3>3. Descriptive Data Mining Methods (20 points)</h3>
+        <ul>
+            <li><strong>Clustering Analysis:</strong>
+                <ul>
+                    <li>Choose a clustering method (K-means or Hierarchical Clustering)</li>
+                    <li>Visualize the clusters using appropriate plots (e.g., scatterplots, dendrograms)</li>
+                    <li>Analyze and describe the characteristics of the clusters</li>
+                </ul>
+            </li>
+            <li><strong>Optional:</strong> Reflect on whether cluster labels could be used as additional features in predictive methods.</li>
+        </ul>
+        
+        <h3>4. Predictive Methods (35 points)</h3>
+        <h4>a) Classification (20 points)</h4>
+        <ul>
+            <li>Apply at least two classification methods from the following: KNN, Naive Bayes, SVM, Decision Tree</li>
+            <li><strong>Evaluation Metrics:</strong> Provide metrics like accuracy, precision, recall</li>
+            <li><strong>Parameter Tuning:</strong> Attempt to adjust model parameters to improve results (for example, modify k in KNN, choose a differnet kernel in SVM)</li>
+            <li><strong>Reflection:</strong> Discuss the results and insights gained</li>
+        </ul>
+        <h4>b) Regression (15 points)</h4>
+        <ul>
+            <li>Perform at least two types of regression, with at least one being a regularization method (Lasso or Ridge)</li>
+            <li><strong>Evaluation Metrics:</strong> Provide metrics like MSE, ROC-AUC</li>
+            <li><strong>Parameter Tuning:</strong> Attempt to adjust parameters to improve results (e.g. alpha)</li>
+            <li><strong>Reflection:</strong> Discuss the results and insights gained</li>
+        </ul>
+        
+        <h3>5. Conclusion (10 points)</h3>
+        <ul>
+            <li><strong>Overall Insights:</strong> Summarize key findings and what you learned from the homework</li>
+            <li><strong>Business Recommendation:</strong> Provide actionable suggestions for decision-makers based on your analysis. Example: "For a wine dataset, the prediction allows identification of factors influencing wine quality, helping producers optimize their processes."</li>
+            <li><strong>References:</strong> Include citations and references for the dataset and any tools or libraries used</li>
+        </ul>
+        
+        
+        
+        <h2>Submission Instructions</h2>
+        <p>Submit your homework as a URL with clearly labeled sections. 
+            Include visualizations, written explanations, and any code snippets where relevant. 
+            Ensure your analysis and recommendations are thorough and well-supported. Note the penalty will apply if you print the entire dataset table (please restrict to the top 5 columns).</p>
+        <p>To make it clean, consider removing any warnings during pip instalation: <code>import warnings
+            warnings.filterwarnings('ignore')</code></p>
+        <h2>Grading Summary</h2>
+        <table border="1">
+            <tr>
+                <th>Section</th>
+                <th>Points</th>
+            </tr>
+            <tr>
+                <td>Dataset Description & Exploratory Analysis</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>Data Preprocessing</td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td>Descriptive Data Mining Methods</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>Predictive Methods</td>
+                <td>35</td>
+            </tr>
+            <tr>
+                <td>Conclusion, Code, Writing</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <th>Total</th>
+                <th>100</th>
+            </tr>
+        </table>
+        
+        <p>Good luck! If you have any questions or need clarification, please reach out during office hours or via email or teams.</p>
+</div>
+</body>
+</html>
