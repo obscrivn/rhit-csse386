@@ -56,6 +56,14 @@ td.presentations {
   background: #dfe;
 }
 
+td.ncaa {
+  color: #6b00c8;
+  font-weight: bold;
+  background-color: #f0e8f5; /* Light green background */
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
 td.noclass {
   background: #eee;
   color: #777;
