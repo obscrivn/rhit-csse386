@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CSSE 386</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" type="text/css" href="../syllabus_files/schedule.css">
+<link rel="stylesheet" type="text/css" href="../syllabus_files/screen.css">
+</head>
+<body>
+<div id="header">
+        <a id="index_link" href="../index.html">CSSE 386</a>
+        <a id="syllabus_link" href="../syllabus.html">Syllabus</a>
+        <a id="schedule_link" href="../schedule.html">Schedule</a>
+        <a id="quiz_link" href="../worksheets.html">Worksheets/Quizzes</a>
+        <a id="quiz_link" href="../labs.html">Labs</a>
+        <a id="resources_link" href="../resources.html">Resources</a>
+        <div style="clear:both;"></div>
+    </div>
+
+<div id="content">
+
+    <h1>Linear Discriminant Analysis with Pokemon Stats (20pts)</h1>
+
+<h2>Discussion</h2>
+<p>LDA could be a possibly useful method to examine your final project data and predict classes (you need to determine what classes you might have). Here is a very short lab with a few useful examples.</p>
+<p><strong>Linear Discriminant Analysis</strong> is a popular technique for performing dimensionality reduction on a dataset. 
+    The new variables are chosen (and the data reprojected) in a way that maximizes the <em>linear separability</em> of a certain set of classes in the underlying data.</p>
+
+<p>So for example, an ideal application of a two-component LDA reduction will look like this:</p>
+
+<p><img src="https://i.imgur.com/BERGLQv.png" alt="LDA 2D Example" class="img-center"/></p>
+
+<p>An LDA transform is useful as a preprocessing step when modeling classes because it transforms the space in such a way that algorithms which then go and draw those boundaries, like support vector machines, perform much better on the transformed data than on the original projections.</p>
+
+<p>However, it is also useful as an EDA technique. In this application, LDA can be compared to PCA.  LDA, meanwhile, is based on categorical labels, and creates new variables that maximize the <em>linear distinguishability</em> of the underlying dataset.</p>
+
+<p>As an EDA technique it tells us a lot about the complexity of our problem, and tells us which classes are most easily distinguishable and why. As a preprocessing technique it improves model performance for any useful model we apply to the dataset afterwards, but particularly for linear ones, like SVMs.</p>
+
+<h2>Application</h2>
+
+<p>In this notebook we will try out using LDA for exploring the Pokemon dataset. Our goal is to predict the type of Pokemon based only on its stat totals. Let's see what happens.</p>
+
+<h3>Data munging (15pts)</h3>
+
+<p>1. Import pokemon data and display the first 3 rows</p>
+<p>2. Check how many Pokemon have a <code>type2</code> value:</p>
+
+
+<p>In order to avoid stat munging due to Pokemon with combined types, 
+    we are going to focus only on Pokemon with a single type (e.g. no dual types allowed).</p>
+
+<p>3. Standardize data before applying LDA. X is created for you below:</p>
+<pre><code class="language-python">
+df = pokemon[pokemon['type2'].isnull()].loc[
+    :, ['sp_attack', 'sp_defense', 'attack', 'defense', 'speed', 'hp', 'type1']
+]
+X = df.iloc[:, :-1].values
+
+# your code
+y = df.iloc[:, -1].values
+</code></pre>
+<p>4. Apply LDA</p>
+<pre><code class="language-python">
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+lda = LinearDiscriminantAnalysis(n_components=3)
+lda.fit(X_scale, y)
+</code></pre>
+
+
+
+<h3>Assessing class-wise variable importance using LDA coefficients</h3>
+
+<p>PCA provides a <code>components_</code> attribute to the fitted reducer, which allows us to directly access the vector components. LDA does not provide this attribute. This is because in LDA, the methodology for transforming a vector is <a href="https://stackoverflow.com/a/15927777/1993206" target="_blank">a bit more complicated</a> than a simple <code>w.T * x</code> reprojection.</p>
+
+<p>An LDA instead provides a <code>coef_</code> attribute, which is analogous, albeit more mathematically complicated. The magnitudes of the components in the <code>coef_</code> tell us how heavily each of the features loads towards the separability of that class.</p>
+
+<p>If a particular class has a particularly high-magnitude coefficient (direction, positive or negative, notwithstanding) then that variable signals that class very well. That variable will factor very heavily into the LDA preprojection. A low-magnitude coefficient, meanwhile, corresponds with a weak signal, and hence will be mostly rubbed out in the reprojection.</p>
+
+<p>If a class has mostly low-magnitude coefficients, that means that it is not easily linearly separable! That class is relatively close to the mean of the dataset or (in the weaker cases) relatively close to a subset of other classes in the dataset.</p>
+
+<p>5. The heatmap that follows demonstrates what this maps out to:</p>
+
+<pre><code class="language-python">
+import matplotlib.pyplot as plt
+plt.style.use('fivethirtyeight')
+import seaborn as sns
+import numpy as np
+
+fig, ax = plt.subplots(1, 1, figsize=(12, 10))
+
+sns.heatmap(pd.DataFrame(lda.coef_,
+                         columns=df.columns[:-1],
+                         index=[lda.classes_]),
+            ax=ax, cmap='RdBu', annot=True)
+
+plt.suptitle('LDA Feature Coefficients')
+pass
+</code></pre>
+
+<p>In this heatmap we see classes which are probably easier to separate, given their large variable coefficients, as well as classes which are probably much harder.</p>
+
+<p>A good example of a separable class is the <code>rock</code> type. Rock type Pokemon load very strongly on all of Special Attack, Special Defense, Speed, and HP, implying that a combination of these stats makes up the Rock archetype. Other highly separable classes are the <code>ghost</code> type and the <code>fighting</code> type, which both sport some high-magnitude coefficients.</p>
+
+<p><code>ice</code> and <code>water</code> are two classes that have very low class separability. They both have coefficients that are mostly close to 0.</p>
+
+<p>6. We can summarize this heatmap by looking at the absolute coefficient totals for each of the classes.</p>
+
+<pre><code class="language-python">
+pd.Series(np.abs(lda.coef_).sum(axis=1), index=lda.classes_).sort_values().plot.bar(
+    figsize=(12, 6), title="LDA Class Coefficient Sums"
+)
+</code></pre>
+
+<p>Again, we see that <code>rock</code> and <code>ghost</code> is much more 
+    separable than <code>water</code> and <code>ice</code>.</p>
+
+<p>The y-values in both the heatmap and the bar plot can be treated as indicial. 
+    Higher is better, but the numbers themselves are not particularly 
+    interpretable.</p>
+
+<p>To see what this difference translates to and to understand 
+    how well we perform overall, 
+    we need to move on to applying our LDA.</p>
+
+<h3>Assessing linear classifier performance by applying the LDA projection</h3>
+
+<p>7. To start with, as with any dimensionality reduction technique, 
+    it is important to note that each additional component used by the model adds 
+    less and less "gain" to the reconstructions. 
+     For example, here are the top three explained variances of the LDA decomposition:</p>
+
+<pre><code class="language-python">
+lda.explained_variance_ratio_
+</code></pre>
+
+<p>8. Recall that PCA picks values which maximize these values directly. 
+    LDA picks values that maximize the differences between classes.</p>
+
+<pre><code class="language-python">
+X_hat = lda.fit_transform(X, y)
+
+import matplotlib as mpl
+
+colors = mpl.cm.get_cmap(name='tab20').colors
+categories = pd.Categorical(pd.Series(y)).categories
+ret = pd.DataFrame(
+    {'C1': X_hat[:, 0], 'C2': X_hat[:, 1], 'Type': pd.Categorical(pd.Series(y))}
+)
+
+fig, ax = plt.subplots(1, figsize=(12, 6))
+
+for col, cat in zip(colors, categories):
+    (ret
+         .query('Type == @cat')
+         .plot.scatter(x='C1', y='C2', color=col, label=cat, ax=ax,
+                       s=100, edgecolor='black', linewidth=1,
+                       title='Two-Component LDA Decomposition')
+         .legend(bbox_to_anchor=(1.2, 1))
+    )
+</code></pre>
+
+<p>This is a convoluted mess! What do we learn? We've learned that <strong>different classes of Pokemon are not very linearly distinguishable by stats alone</strong>.</p>
+
+<p>In summary this plot tells us that classifying Pokemon using stats alone is a non-linear problem. 
+    This in turn tells us that given the current set of features, 
+    predicting Pokemon type is <em>a very hard classification problem</em>. 
+    Most problems that are not linearly separable are very hard</p>
+
+
+
+<h2>9. Reflection (5pts)</h2>
+
+<p>Think of how to apply LDA to NCAA data. Are there any classes you can define/create?</p>
+
+
+                </body>
+                </html>
