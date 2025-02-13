@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Homework 2: Advanced Data Mining Techniques</title>
+    <link rel="stylesheet" type="text/css" href="../syllabus_files/schedule.css">
+    <link rel="stylesheet" type="text/css" href="../syllabus_files/screen.css">
+  </head>
+  <body>
+    <div id="header">
+      <a id="index_link" href="../index.html">CSSE 386</a>
+      <a id="syllabus_link" href="../syllabus.html">Syllabus</a>
+      <a id="schedule_link" href="../schedule.html">Schedule</a>
+      <a id="quiz_link" href="../worksheets.html">Worksheets/Quizzes</a>
+      <a id="quiz_link" href="../labs.html">Labs</a>
+      <a id="resources_link" href="../resources.html">Resources</a>
+      <div style="clear:both;"></div>
+    </div>
+
+    <div id="content">
+      <h1>Homework 2: Advanced Data Mining Techniques</h1>
+      
+      <p>Objective:</p>
+<ul>
+  <li>Enhance your data exploration and preprocessing techniques by incorporating advanced dimensionality reduction methods such as PCA and LDA.</li>
+  <li>Strengthen your understanding of unsupervised learning by generating clustering-based pseudo-labels for further supervised analysis.</li>
+  <li>Develop critical thinking skills by comparing different data representations and evaluating their impact on predictive modeling.</li>
+  <li>Foster the ability to derive actionable insights and data-driven recommendations based on comprehensive analysis.</li>
+</ul>
+
+
+      <h2>Instructions</h2>
+      <p>This is an individual assignment. No collaboration is allowed.</p>
+      <p>
+        In Homework 2 you will extend your analysis from Homework 1
+      </p>
+      <p><strong>Provide reference/citation to any method, metric, function that had not been covered in class.</strong> For any methods/code covered in class Labs, you do not need to provide references.</p>
+      
+      <h3>1. PCA (Principal Component Analysis) 30pts</h3>
+
+          <ul>
+            <li>Standardize/normalize your dataset if you have not already done so in Homework 1</li>
+            <li>Apply PCA to your dataset</li>
+            <li>Plot the explained variance ratio for the principal components (e.g., a scree plot)</li>
+            <li>Choose the number of components to retain and explain your choice</li>
+            <li>Visualize your data projected onto the first two principal components. Discuss any interesting observation (recall how we interpreted the PCA plots in class)</li>
+          </ul>
+
+
+            <h3>2. LDA (Linear Discriminant Analysis) 30pts</h3>
+
+          <ul>
+            <li>If your dataset contains a categorical variable, use it for LDA</li>
+            <li>If you dataset does not contain any features that can be used as classes, 
+                revisit your cluster analysis and create a new column with cluster labels - these will be your classes for LDA
+            <pre><code>HINTS (example):
+kmeans = KMeans(n_clusters=3, random_state=42)
+cluster_labels = kmeans.fit_predict(scaled_data)
+# Use cluster_labels as your y:
+lda.fit_transform(scaled_data, cluster_labels)
+            </code></pre>
+            </li>
+            <li>Show the graph with the labels/classes distribution - is it balanced or unbalanced?</li>
+            <li>Apply LDA. Hint: use sklearn examples for plotting LDA as scatterplot</li>
+            <li>Discuss any interesting observations and the model prediction</li>
+          </ul>
+
+
+      
+
+      <h3>3. Enhanced Predictive Modeling 30pts</h3>
+      <ul>
+        <li>
+          Integrate your PCA into your predictive modeling framework from Homework 1 (you only need one regression model)
+        </li>
+        <li>
+          Evaluate whether the reduced feature space leads to improved model performance
+        </li>
+        
+      </ul>
+      
+      <h3>4. Reflections 10pts</h3>
+
+          <ol>
+            <li>
+              Did you find the dimensionality techniques helpful to improve the predicting models?
+            </li>
+            <li>
+                Summarize the key insights obtained from applying PCA and LDA (for example, in your report to the client, what would you share as insights from this data)
+            </li>
+            <li>What did you learn from this homework? Share your experience and any challenges you faced.</li>
+          </ol>
+        </li>
+        
+      
+
+      <h2>Submission Instructions</h2>
+      <ul>
+        <li>Submit your homework as a URL with clearly labeled sections corresponding to the tasks above (continue your homework 1 colab)</li>
+        <li>Use text cells for providing written explanations</li>
+        <li>Ensure your code is clean and warnings are suppressed (e.g., using <code>import warnings; warnings.filterwarnings('ignore')</code>).</li>
+      </ul>
+
+      <h2>Grading Summary</h2>
+      <table border="1">
+        <tr>
+          <th>Section</th>
+          <th>Points</th>
+        </tr>
+        <tr>
+          <td>Dimensionality Reduction (PCA)</td>
+          <td>30</td>
+        </tr>
+        <tr>
+          <td>LDA</td>
+          <td>30</td>
+        </tr>
+        <tr>
+          <td>Predictive Modeling Enhancement</td>
+          <td>30</td>
+        </tr>
+        <tr>
+          <td>Conclusion and Reflections</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <th>Total</th>
+          <th>100</th>
+        </tr>
+      </table>
+
+      
+      
+      <p>Good luck with Homework 2! If you have any questions or need clarification, please reach out.</p>
+    </div>
+  </body>
+</html>

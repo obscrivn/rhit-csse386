@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+    <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>CSSE 386</title>
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="./syllabus_files/screen.css">
+    <link rel="stylesheet" type="text/css" href="./syllabus_files/schedule.css">
+    <style>
+        li {
+            margin-bottom: 15px; /* Adds 15px of space below each list item */
+            margin-top: 10px;
+        }
+    </style>
+    </head>
+    <body>
+    <div id="header">
+            <a id="index_link" href="./index.html">CSSE 386</a>
+            <a id="syllabus_link" href="./syllabus.html">Syllabus</a>
+            <a id="schedule_link" href="./schedule.html">Schedule</a>
+            <a id="quiz_link" href="./worksheets.html">Worksheets/Quizzes</a>
+            <a id="quiz_link" href="./labs.html">Labs</a>
+            <a id="resources_link" href="./resources.html">Resources</a>
+            <div style="clear:both;"></div>
+        </div>
+    
+    <div id="content">
+    <h1>CSSE386 Data Mining Exam 2 Review Study Guide</h1>
+    <p>This study guide covers key concepts, techniques, and example questions to prepare for Exam 2 in your Data Mining course CSSE386. Review each section carefully and check the solutions at the end.</p>
+    <hr>
+    <h2>Information</h2>
+    <ul>
+        <li>Allowed material: 1 sheet (2 sided) written notes + you can use notes and handouts from exam 1</li>
+       <li>Format: online via Gradescope during the class scheduled time, 50 min total. You do not need to come to class to take it </li>
+        <li> 40 questions in total: 15 questions (topics covered in Exam 1) and 25 questions (new topics)
+            </li>
+
+            </ul>
+    <h2>1. Dimensionality Reduction</h2>
+    <h3>Key Topics:</h3>
+    <ul>
+        <li>Understanding the challenges of high-dimensional data</li>
+    <li>Recognizing the difference between feature selection and feature reduction</li>
+    </ul>
+    
+    <h3>Example Questions:</h3>
+    <ol>
+        <li><strong>Multiple Choice</strong>: What is the primary goal of dimensionality reduction?<br>
+            <ol type="a">
+                <li>Increase the number of features</li>
+                <li>Reduce noise and computational complexity while preserving essential structure</li>
+                <li>Overfit the data</li>
+                <li>Separate data into clusters</li>
+            </ol>
+        </li>
+
+        <li><strong>Multiple Choice</strong>: Which statement best differentiates feature reduction from feature selection?<br>
+            <ol type="a">
+                <li>Feature reduction transforms the original features into a new, lower-dimensional space, whereas feature selection chooses a subset of the original features without transformation.</li>
+                <li>Feature reduction chooses a subset of the original features, whereas feature selection transforms the data into a new feature space.</li>
+                <li>Both methods perform the same operation and the terms are interchangeable.</li>
+            </ul>
+        </li>
+    </ol>
+
+    <hr>
+
+    <!-- Topic 2: Principal Component Analysis (PCA) -->
+    <h2>Topic 2: Principal Component Analysis (PCA)</h2>
+    <h3>Key Topics:</h3>
+    <ul>
+        <li>Understanding the PCA technique for dimensionality reduction</li>
+        <li>Understanding the covariance matrix</li>
+    <li>Choosing principal components</li>
+    <li>Interpreting principal components from plotted results</li>
+    </ul>
+    <h3>Example Questions:</h3>
+    <ol>
+        <li><strong>True/False</strong>: PCA is a supervised learning method</li>
+        
+        <li><strong>Multiple Choice</strong>: In PCA, the eigenvectors corresponding to the largest eigenvalues represent:<br>
+            <ol type="a">
+                <li>Noise directions</li>
+                <li>Directions with maximum variance</li>
+                <li>Random directions</li>
+                <li>Directions with minimum variance</li>
+            </ol>
+        </li>
+        
+        <li><strong>Multiple Choice</strong>: Which statement best describes the elements of a covariance matrix?
+            <ol type="a">
+                <li>Diagonal elements represent the mean of each feature, while off-diagonals represent the correlation between features</li>
+                <li>Diagonal elements represent the variances of each feature, while off-diagonals represent the covariances between pairs of features</li>
+                <li>Diagonal elements represent the standard deviations of each feature, while off-diagonals are always zero</li>
+                <li>Diagonal elements represent the eigenvalues of the data, while off-diagonals represent the eigenvectors</li>
+            </ol>
+        </li>
+    </ol>
+
+    <hr>
+
+    <!-- Topic 3: Linear Discriminant Analysis (LDA) -->
+    <h2>Topic 3: Linear Discriminant Analysis (LDA)</h2>
+    <h3>Key Topics:</h3>
+    <ul>
+        <li>Understanding LDA techniques</li>
+    <li>Recognizing differences between LDA and PCA</li>
+    </ul>
+    <h3>Example Questions:</h3>
+    <ol>
+        <li><strong>Multiple Choice</strong>: Which method is specifically designed to maximize the separability between different classes?<br>
+            <ol type="a">
+                <li>PCA</li>
+                <li>LDA</li>
+                <li>k-means clustering</li>
+                <li>Support Vector Machines</li>
+            </ol>
+        </li>
+        
+
+        <li><strong>Multiple Choice</strong>: Which statement best describes Linear Discriminant Analysis (LDA)?<br>
+            <ol type="a">
+                <li>It finds a projection that maximizes the overall variance in the data</li>
+                <li>It projects data onto a subspace that maximizes the ratio of between-class variance to within-class variance</li>
+                <li>It employs a non-linear mapping to reduce dimensionality</li>
+                <li>It ignores class labels during the dimensionality reduction process</li>
+            </ol>
+        </li>
+        
+        <li><strong>Multiple Choice</strong>: Which of the following best distinguishes PCA from LDA?<br>
+            <ol type="a">
+                <li>PCA is unsupervised whereas LDA is supervised</li>
+                <li>PCA maximizes between-class variance while LDA maximizes overall variance</li>
+                <li>PCA uses class labels in its computation, while LDA does not</li>
+                <li>Both methods are identical in their approach</li>
+            </ol>
+        </li>
+    </ol>
+
+    <hr>
+
+    <!-- Topic 4: Recommendation Systems -->
+    <h2>Topic 4: Recommendation Systems</h2>
+    <h3>Key Topics:</h3>
+    <ul>
+        <li>Collaborative Filtering vs Content-Based Filtering</li>
+        <li>Memory-based vs Model-based techniques</li>
+        <li>Explicit vs Implicit information</li>
+        <li>Cosine similarity (pros/cons)</li>
+        <li>Matrix Factorization (pros/cons)</li>
+        
+    </ul>
+    <h3>Example Questions:</h3>
+    <ol>
+       
+        <li><strong>Multiple Choice</strong>: In recommendation systems, which approach primarily relies on analyzing item features and content to suggest items to users?<br>
+            <ol type="a">
+                <li>Collaborative filtering</li>
+                <li>Content-based filtering</li>
+                <li>Hybrid filtering</li>
+                <li>Matrix factorization</li>
+            </ol>
+        </li>
+        
+        
+        <li><strong>Multiple Choice</strong>: A potential drawback of content-based filtering:<br>
+            <ol type="a">
+                <li>Requires large amounts of user interaction data</li>
+                <li>May overspecialize recommendations, limiting diversity ("filter bubble")</li>
+                <li>Cannot incorporate item features</li>
+                <li>Is computationally intensive in high-dimensional spaces</li>
+            </ol>
+        </li>
+        
+        <li><strong>Multiple Choice</strong>: matrix factorization techniques are primarily used to:<br>
+            <ol type="a">
+                <li>Cluster users into distinct groups</li>
+                <li>Decompose the user–item interaction matrix to identify latent factors</li>
+                <li>Normalize user ratings</li>
+                <li>Remove outliers from the dataset</li>
+            </ol>
+        </li>
+        
+    </ol>
+
+    <hr>
+
+    <h3>General Tips for Exam Preparation</h3>
+    <ol>
+        <li>Review Lecture Notes: Focus on definitions, key formulas, and algorithms</li>
+        <li>Understand the Concepts: Avoid memorization; aim to understand the "why" behind each method</li>
+    </ol>
+    <p>Good luck with your exam preparation!</p>
+    <hr>
+
+    <h2>Answer Key with Explanations</h2>
+
+    <h3>Topic 1: Dimensionality Reduction</h3>
+    <ol>
+        <li><strong>Answer:</strong> b. <em>Explanation:</em> The goal is to reduce noise and computational complexity while preserving the essential structure of the data</li>
+        
+        
+        <li><strong>Answer:</strong> a. <em>Explanation:</em> Feature reduction (e.g., via PCA) transforms the original features into a new, lower-dimensional space, whereas feature selection picks 
+            a subset of the original features without altering their form</li>
+    </ol>
+
+    <h3>Topic 2: Principal Component Analysis (PCA)</h3>
+    <ol>
+        <li><strong>Answer:</strong> False. <em>Explanation:</em> PCA is an unsupervised method; it does not use label information</li>
+        
+        <li><strong>Answer:</strong> b. <em>Explanation:</em> The eigenvectors corresponding to the largest eigenvalues indicate the directions of maximum variance in the data.</li>
+       
+       
+        
+        <li><strong>Answer:</strong> b. <em>Explanation:</em> Diagonal Elements are the variances of the individual features, off-Diagonal Elements represent the covariances between different features </li>
+        
+    </ol>
+
+    <h3>Topic 3: Linear Discriminant Analysis (LDA)</h3>
+    <ol>
+        <li><strong>Answer:</strong> b. <em>Explanation:</em> LDA is specifically designed to maximize the separability between different classes by using class label information.</li>
+        
+       
+        <li><strong>Answer:</strong> b. <em>Explanation:</em> LDA projects data onto a subspace that maximizes the ratio of between-class variance to within-class variance, thereby enhancing class separability</li>
+        
+        <li><strong>Answer:</strong> a. <em>Explanation:</em> The key distinction is that PCA is unsupervised (ignores class labels), whereas LDA is a supervised technique that uses class labels to find the optimal projection for separation</li>
+    </ol>
+
+    <h3>Topic 4: Recommendation Systems</h3>
+    <ol>
+        
+        <li><strong>Answer:</strong> b. <em>Explanation:</em> Content-based filtering relies on analyzing the features of items (such as keywords or attributes) to make recommendations</li>
+        
+        <li><strong>Answer:</strong> b. <em>Explanation:</em> A drawback of content-based filtering is that it may overspecialize recommendations, limiting the diversity of suggestions</li>
+        
+        <li><strong>Answer:</strong> b. <em>Explanation:</em> Matrix factorization techniques decompose the sparce user–item interaction matrix into 2 small matrices (user and items) to uncover latent factors</li>
+      
+    </ol>
+</body>
+</html>
